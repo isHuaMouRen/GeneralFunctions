@@ -3,8 +3,8 @@ using System.Security.Cryptography;
 using System.Text;
 
 // HashHelper
+// 哈希转换
 // Author: isHuaMouRen
-// License: MIT
 // Version: 2025-9-12 18:32
 
 public static class HashHelper

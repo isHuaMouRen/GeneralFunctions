@@ -1,6 +1,11 @@
 using System;
 using System.Collections.Generic;
 
+// Memory Helper
+// 内存管理
+// Version: 2025-9-12 18:44
+// Author: isHuaMouRen
+
 public class MemoryHelper
 {
     private static List<byte[]> memoryBlocks = new List<byte[]>();

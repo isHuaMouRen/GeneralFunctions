@@ -13,8 +13,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 // Functions
+// 通用工具集
 // Author: isHuaMouRen
-// License: MIT
 // Version: 2025-9-12 18:32
 
 public static class Functions
