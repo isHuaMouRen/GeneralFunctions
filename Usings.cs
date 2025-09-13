@@ -1,5 +1,5 @@
 using FileBinaryHelper;
-using Functions;
+using FunctionsHelper;
 using HashHelper;
 using InputManager;
 using MemoryHelper;
