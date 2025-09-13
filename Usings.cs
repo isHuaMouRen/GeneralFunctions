@@ -1,3 +1,4 @@
+using FileBinaryHelper;
 using Functions;
 using HashHelper;
 using InputManager;

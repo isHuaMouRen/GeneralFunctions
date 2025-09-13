@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 // Author: isHuaMouRen
 // Version: 2025-9-12 18:32
 
-namespace Functions
+namespace FunctionsHelper
 {
     public static class Functions
     {

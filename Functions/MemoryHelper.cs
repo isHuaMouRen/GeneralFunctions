@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace MemoryHelper
 {
-    public class MemoryHelper
+    public class Memory
     {
         private static List<byte[]> memoryBlocks = new List<byte[]>();
 

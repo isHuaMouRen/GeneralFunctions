@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HashHelper
 {
-    public static class HashHelper
+    public static class Hash
     {
         /// <summary>
         /// 暂无描述
