@@ -1,12 +1,5 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 // RegistryLib
 // 注册表操作
@@ -107,6 +100,6 @@ namespace RegistryLib
                 Console.WriteLine($"读取注册表失败: {ex.Message}");
                 return defaultValue;
             }
-        }        
+        }
     }
 }

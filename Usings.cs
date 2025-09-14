@@ -1,4 +1,6 @@
-using CmdLin;
+using Newtonsoft.Json;
+
+using CmdLib;
 using HashLib;
 using HexLib;
 using IniLib;
