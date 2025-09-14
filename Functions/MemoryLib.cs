@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 
-// Memory Helper
+// MemoryLib
 // 内存管理
-// Version: 2025-9-12 18:44
-// Author: isHuaMouRen
+// Version: 2025-9-14 10:53
 
-namespace MemoryHelper
+namespace MemoryLib
 {
-    public class Memory
+    public class MemoryHelper
     {
         private static List<byte[]> memoryBlocks = new List<byte[]>();
 

@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-// FileBinaryHelper
-// Version: 2025-9-13 9:36
-// Author: isHuaMouRen
+// HexLib
+// 操作文件的十六进制数据
+// Version: 2025-9-14 10:50
 
-namespace FileBinaryHelper
+namespace HexLib
 {
-    public static class BinaryFileHelper
+    public static class HexHelper
     {
         /// <summary>
         /// 读取文件十六进制信息

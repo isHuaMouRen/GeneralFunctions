@@ -1,13 +1,12 @@
 using System.Text;
 
-// HashHelper
+// HashLib
 // 哈希转换
-// Author: isHuaMouRen
-// Version: 2025-9-12 18:32
+// Version: 2025-9-14 10:52
 
-namespace HashHelper
+namespace HashLib
 {
-    public static class Hash
+    public static class HashHelper
     {
         /// <summary>
         /// 暂无描述
