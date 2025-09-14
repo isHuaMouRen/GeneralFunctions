@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace IniLib
 {
-    public class IniHelper
+    public class Ini
     {
         /// <summary>
         /// 写ini配置项

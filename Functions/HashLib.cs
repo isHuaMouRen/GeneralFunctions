@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HashLib
 {
-    public static class HashHelper
+    public static class Hash
     {
         /// <summary>
         /// 暂无描述

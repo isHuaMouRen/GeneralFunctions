@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CmdLib
 {
-    public class CmdHelper
+    public class Cmd
     {
         /// <summary>
         /// 异步执行控制台命令

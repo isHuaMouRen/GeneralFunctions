@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace JsonLib
 {
-    public class JsonHelper
+    public class Json
     {
         /// <summary>
         /// 读取Json

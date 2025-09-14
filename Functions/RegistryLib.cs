@@ -7,7 +7,7 @@ using System;
 
 namespace RegistryLib
 {
-    public static class RegistryHelper
+    public static class RegistryLIB
     {
         //写注册表项
         //rootKey常用常量

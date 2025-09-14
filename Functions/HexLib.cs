@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexLib
 {
-    public static class HexHelper
+    public static class Hex
     {
         /// <summary>
         /// 读取文件十六进制信息
