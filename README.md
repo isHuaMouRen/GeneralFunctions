@@ -17,11 +17,11 @@ public static Point Show(double opacity = 0.2)
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|opacity|double|0.2|选择器窗口的透明度|
+|`opacity`|double|0.2|选择器窗口的透明度|
 
 |返回值类型|描述|
 |-|-|
-|Point|坐标|
+|`Point`|坐标|
 
 ### CmdLib
 
@@ -36,14 +36,14 @@ public static async Task<string> RunCmdAsync(string command, bool showWindow = f
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|command|string|*None*|命令|
-|showWindow|bool|false|是否显示窗口|
-|closeAfter|bool|true|运行完毕后是否关闭窗口|
-|workingDirctory|string|*空字符串*|运行目录|
+|`command`|string|*None*|命令|
+|`showWindow`|bool|false|是否显示窗口|
+|`closeAfter`|bool|true|运行完毕后是否关闭窗口|
+|`workingDirctory`|string|*空字符串*|运行目录|
 
 |返回值类型|描述|
 |-|-|
-|Task<string>|命令运行结果|
+|`Task<string>`|命令运行结果|
 
 ## HashLib
 
@@ -58,11 +58,11 @@ public static string MD5(string text)
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|text|string|*None*|字符串|
+|`text`|string|*None*|字符串|
 
 |返回值类型|描述|
 |-|-|
-|string|MD5数据|
+|`string`|MD5数据|
 
 ---
 
@@ -73,11 +73,11 @@ public static string SHA1(string text)
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|text|string|*None*|字符串|
+|`text`|string|*None*|字符串|
 
 |返回值类型|描述|
 |-|-|
-|string|SHA1数据|
+|`string`|SHA1数据|
 
 ---
 
@@ -88,11 +88,11 @@ public static string SHA256(string text)
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|text|string|*None*|字符串|
+|`text`|string|*None*|字符串|
 
 |返回值类型|描述|
 |-|-|
-|string|SHA256数据|
+|`string`|SHA256数据|
 
 ---
 
@@ -103,11 +103,11 @@ public static string SHA512(string text)
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|text|string|*None*|字符串|
+|`text`|string|*None*|字符串|
 
 |返回值类型|描述|
 |-|-|
-|string|SHA512数据|
+|`string`|SHA512数据|
 
 ### HexLib
 
@@ -122,13 +122,13 @@ public static async Task<string[]> ReadHexAsync(string filePath, long offset, in
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|filePath|string|*None*|文件路径|
-|offset|long|*None*|起始位置(从0开始)|
-|count|int|16|读取数量|
+|`filePath`|string|*None*|文件路径|
+|`offset`|long|*None*|起始位置(从0开始)|
+|`count`|int|16|读取数量|
 
 |返回值类型|描述|
 |-|-|
-|Task<string[]>|十六进制字符串数组|
+|`Task<string[]>`|十六进制字符串数组|
 
 ---
 
@@ -139,13 +139,13 @@ public static async Task ModifyBytesAsync(string filePath, long offset, byte[] n
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|filePath|string|*None*|文件路径|
-|offset|long|*None*|起始位置(从0开始)|
-|newBytes|byte[]|*None*|新的数据(覆盖原有数据)|
+|`filePath`|string|*None*|文件路径|
+|`offset`|long|*None*|起始位置(从0开始)|
+|`newBytes`|byte[]|*None*|新的数据(覆盖原有数据)|
 
 |返回值类型|描述|
 |-|-|
-|Task|*无返回值*|
+|`Task`|*无返回值*|
 
 ---
 
@@ -156,13 +156,13 @@ public static async Task InsertBytesAsync(string filePath, long offset, byte[] b
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|filePath|string|*None*|文件路径|
-|offset|long|*None*|起始位置(从0开始)|
-|bytesToInsert|byte[]|*None*|要插入的数据(后方数据整体后移)|
+|`filePath`|string|*None*|文件路径|
+|`offset`|long|*None*|起始位置(从0开始)|
+|`bytesToInsert`|byte[]|*None*|要插入的数据(后方数据整体后移)|
 
 |返回值类型|描述|
 |-|-|
-|Task|*无返回值*|
+|`Task`|*无返回值*|
 
 ---
 
@@ -173,13 +173,13 @@ public static async Task DeleteBytesAsync(string filePath, long offset, int leng
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|filePath|string|*None*|文件路径|
-|offset|long|*None*|起始位置(从0开始)|
-|length|int|*None*|要删除的数量|
+|`filePath`|string|*None*|文件路径|
+|`offset`|long|*None*|起始位置(从0开始)|
+|`length`|int|*None*|要删除的数量|
 
 |返回值类型|描述|
 |-|-|
-|Task|*无返回值*|
+|`Task`|*无返回值*|
 
 ---
 
@@ -190,8 +190,8 @@ public static byte[] HexStringArrayToBytes(string[] hexArray)
 
 |参数|类型|默认值|描述|
 |-|-|-|-|
-|hexArray|string[]|*None*|十六进制数据字符串数组|
+|`hexArray`|string[]|*None*|十六进制数据字符串数组|
 
 |返回值类型|描述|
 |-|-|
-|byte[]|字节集数据|
+|`byte[]`|字节集数据|
