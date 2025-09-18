@@ -12,8 +12,24 @@
 |HexLib|Hex|文件十六进制数据操作|[跳转](/Wiki/HexLib.md)|
 |HotkeyManagerLib|HotkeyManager|全局热键|[跳转](/Wiki/HotkeyManagerLib.md)|
 |IniLib|Ini|INI配置文件操作|[跳转](/Wiki/IniLib.md)|
-|InputLib|Mouse Keyboard|模拟键鼠操作|正在开发...|
+|InputLib|Mouse Keyboard|模拟键鼠操作|[跳转](/Wiki/InputLib.md)|
 |JsonLib|Json|Json文件读写|正在开发...|
 |LogLib|Log|写日志|正在开发...|
 |MemoryLib|Memory|内存操作|正在开发...|
 |RegistryLib|RegistryLIB|注册表操作|正在开发...|
+
+## 全部引用
+
+``` C#
+using ToolLib.PosSelectorLib;
+using ToolLib.CmdLib;
+using ToolLib.HashLib;
+using ToolLib.HexLib;
+using ToolLib.HotkeyManagerLib;
+using ToolLib.IniLib;
+using ToolLib.InputLib;
+using ToolLib.JsonLib;
+using ToolLib.LogLib;
+using ToolLib.MemoryLib;
+using ToolLib.RegistryLib;
+```

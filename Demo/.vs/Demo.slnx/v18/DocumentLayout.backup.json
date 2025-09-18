@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "Z:\\_Project\\.Functions\\Demo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{85371C24-D58A-44EC-BFB6-26DE4FB21547}|Demo.csproj|z:\\_project\\.functions\\demo\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{85371C24-D58A-44EC-BFB6-26DE4FB21547}|Demo.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{85371C24-D58A-44EC-BFB6-26DE4FB21547}|Demo.csproj|z:\\_project\\.functions\\demo\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85371C24-D58A-44EC-BFB6-26DE4FB21547}|Demo.csproj|solutionrelative:main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{85371C24-D58A-44EC-BFB6-26DE4FB21547}|Demo.csproj|Z:\\_Project\\.Functions\\Demo\\main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{85371C24-D58A-44EC-BFB6-26DE4FB21547}|Demo.csproj|solutionrelative:main_form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,14 +39,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Form1.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "Z:\\_Project\\.Functions\\Demo\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "Z:\\_Project\\.Functions\\Demo\\Form1.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "Form1.cs [\u8BBE\u8BA1]",
+              "Title": "Main_Form.cs",
+              "DocumentMoniker": "Z:\\_Project\\.Functions\\Demo\\Main_Form.cs",
+              "RelativeDocumentMoniker": "Main_Form.cs",
+              "ToolTip": "Z:\\_Project\\.Functions\\Demo\\Main_Form.cs",
+              "RelativeToolTip": "Main_Form.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T10:56:51.409Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-09-18T10:33:18.345Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Main_Form.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "Z:\\_Project\\.Functions\\Demo\\Main_Form.cs",
+              "RelativeDocumentMoniker": "Main_Form.cs",
+              "ToolTip": "Z:\\_Project\\.Functions\\Demo\\Main_Form.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "Main_Form.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T10:56:51.409Z"
             }
           ]
         }

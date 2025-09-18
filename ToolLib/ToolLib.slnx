@@ -2,5 +2,5 @@
   <Configurations>
     <BuildType Name="Release" />
   </Configurations>
-  <Project Path="Demo.csproj" Id="85371c24-d58a-44ec-bfb6-26de4fb21547" />
+  <Project Path="ToolLib.csproj" Id="e1a7789b-df08-4942-a161-cd893921e292" />
 </Solution>
