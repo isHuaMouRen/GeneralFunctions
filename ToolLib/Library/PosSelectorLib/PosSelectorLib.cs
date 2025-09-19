@@ -1,5 +1,4 @@
-﻿using ToolLib.PosSelectorLib;
-using System.Drawing;
+﻿using System.Drawing;
 
 // PosSelectorLib
 // 坐标选择器
