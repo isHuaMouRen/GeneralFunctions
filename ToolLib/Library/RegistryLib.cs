@@ -3,11 +3,11 @@ using System;
 
 // RegistryLib
 // 注册表操作
-// Version: 2025-9-14 10:53
+// Version: 2025-9-20 9:13
 
 namespace ToolLib.RegistryLib
 {
-    public static class RegistryLIB
+    public static class RegistryHelper
     {
         //写注册表项
         //rootKey常用常量

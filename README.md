@@ -4,19 +4,19 @@
 
 ## 工具列表
 
-|工具名|类名|描述|详细|
-|-|-|-|-|
-|PosSelectorLib|PosSelector|坐标选择器|[跳转](/Wiki/PosSelectorLib.md)|
-|CmdLib|Cmd|命令行工具|[跳转](/Wiki/CmdLib.md)|
-|HashLib|Hash|哈希转换|[跳转](/Wiki/HashLib.md)|
-|HexLib|Hex|文件十六进制数据操作|[跳转](/Wiki/HexLib.md)|
-|HotkeyManagerLib|HotkeyManager|全局热键|[跳转](/Wiki/HotkeyManagerLib.md)|
-|IniLib|Ini|INI配置文件操作|[跳转](/Wiki/IniLib.md)|
-|InputLib|Mouse Keyboard|模拟键鼠操作|[跳转](/Wiki/InputLib.md)|
-|JsonLib|Json|Json文件读写|正在开发...|
-|LogLib|Log|写日志|正在开发...|
-|MemoryLib|Memory|内存操作|正在开发...|
-|RegistryLib|RegistryLIB|注册表操作|正在开发...|
+|工具名|类名|描述|详细|备注|
+|-|-|-|-|-|
+|PosSelectorLib|PosSelector|坐标选择器|[跳转](/Wiki/PosSelectorLib.md)||
+|CmdLib|Cmd|命令行工具|[跳转](/Wiki/CmdLib.md)||
+|HashLib|Hash|哈希转换|[跳转](/Wiki/HashLib.md)||
+|HexLib|Hex|文件十六进制数据操作|[跳转](/Wiki/HexLib.md)||
+|HotkeyManagerLib|HotkeyManager|全局热键|[跳转](/Wiki/HotkeyManagerLib.md)||
+|IniLib|Ini|INI配置文件操作|[跳转](/Wiki/IniLib.md)||
+|InputLib|Mouse Keyboard|模拟键鼠操作|[跳转](/Wiki/InputLib.md)||
+|JsonLib|Json|Json文件读写|[跳转](/Wiki/JsonLib.md)||
+|LogLib|Log|写日志|[跳转](/Wiki/LogLib.md)||
+|MemoryLib|Memory|内存操作|[跳转](/Wiki/MemoryLib.md)||
+|RegistryLib|RegistryLIB|注册表操作|[跳转](/Wiki/RegistryLib.md)|仅支持Windows操作系统|
 
 ## 全部引用
 

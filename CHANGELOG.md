@@ -1,5 +1,17 @@
 # Change Log
 
+## 2025.09.20 - 01
+### 更新
+- 更新 `JsonLib` 描述文件
+- 更新 `LogLib` 描述文件
+- 更新 `MemoryLib` 描述文件
+- 更新 `RegistryLib` 描述文件
+- 自述文件中的文件列表后方添加 `备注` 列
+### 更改
+- 更改 `RegistryLib` 的类名为 `RegistryHelper` ，而不是原来的 `RegistryLIB`
+
+
+
 ## 2025.09.19 - 02
 ### 更改
 - 更改 `Builds` 文件夹结构
