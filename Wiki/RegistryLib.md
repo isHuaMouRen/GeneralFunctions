@@ -15,7 +15,7 @@ public static bool WriteRegistry(RegistryKey rootKey, string subKeyPath, string 
 |`subKeyPath`|string|*None*|路径，前后无需添加反斜杠|
 |`valueName`|string|*None*|键名|
 |`value`|object|*None*|值|
-|`valueKind`|RegistryValueKind|值类型|
+|`valueKind`|RegistryValueKind|*None*|值类型|
 
 |返回值类型|描述|
 |-|-|

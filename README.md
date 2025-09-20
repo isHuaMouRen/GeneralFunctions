@@ -16,7 +16,7 @@
 |JsonLib|Json|Json文件读写|[跳转](/Wiki/JsonLib.md)||
 |LogLib|Log|写日志|[跳转](/Wiki/LogLib.md)||
 |MemoryLib|Memory|内存操作|[跳转](/Wiki/MemoryLib.md)||
-|RegistryLib|RegistryLIB|注册表操作|[跳转](/Wiki/RegistryLib.md)|仅支持Windows操作系统|
+|RegistryLib|RegistryHelper|注册表操作|[跳转](/Wiki/RegistryLib.md)|仅支持Windows操作系统|
 
 ## 全部引用
 
