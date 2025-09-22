@@ -1,5 +1,13 @@
 # Change Log
 
+## 2025.09.22 - 01
+### 更新
+- 更新 `AreaSelectorLib` 库，用于选择一片区域，返回 `Rectangle` 类型
+- 更新 `GdiToolLib` 库，用于在屏幕上绘制各种东西
+- 自述文件更新 `AreSelectorLib` 与 `GdiToolLib` 的描述
+
+
+
 ## 2025.09.20 - 02
 ### 修复
 - 修复自述文件和说明文件中关于 `RegistryLib` 的错误

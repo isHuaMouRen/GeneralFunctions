@@ -100,7 +100,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\AreaSelectorLib\AreaSelectorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Library\AreaSelectorLib\AreaSelectorForm.Designer.cs">
+      <DependentUpon>AreaSelectorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\AreaSelectorLib\AreaSelectorLib.cs" />
     <Compile Include="Library\CmdLib.cs" />
+    <Compile Include="Library\GdiToolLib.cs" />
     <Compile Include="Library\HashLib.cs" />
     <Compile Include="Library\HexLib.cs" />
     <Compile Include="Library\HotkeyManagerLib.cs" />
@@ -121,6 +129,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Library\AreaSelectorLib\AreaSelectorForm.resx">
+      <DependentUpon>AreaSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Library\PosSelectorLib\PosSelectorForm.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

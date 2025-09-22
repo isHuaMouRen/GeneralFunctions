@@ -6,8 +6,10 @@
 
 |工具名|类名|描述|详细|备注|
 |-|-|-|-|-|
+|AreaSelectorLib|AreaSelector|区域选择器|正在开发...|测试版，请等待稳定后再使用|
 |PosSelectorLib|PosSelector|坐标选择器|[跳转](/Wiki/PosSelectorLib.md)||
 |CmdLib|Cmd|命令行工具|[跳转](/Wiki/CmdLib.md)||
+|GdiToolLib|GdiTool|绘制工具|正在开发...|测试版，请等待稳定后再使用|
 |HashLib|Hash|哈希转换|[跳转](/Wiki/HashLib.md)||
 |HexLib|Hex|文件十六进制数据操作|[跳转](/Wiki/HexLib.md)||
 |HotkeyManagerLib|HotkeyManager|全局热键|[跳转](/Wiki/HotkeyManagerLib.md)||
@@ -21,8 +23,10 @@
 ## 全部引用
 
 ``` C#
+using ToolLib.AreaSelectorLib;
 using ToolLib.PosSelectorLib;
 using ToolLib.CmdLib;
+using ToolLib.GdiToolLib;
 using ToolLib.HashLib;
 using ToolLib.HexLib;
 using ToolLib.HotkeyManagerLib;
