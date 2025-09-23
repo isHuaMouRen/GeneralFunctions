@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ToolLib.Library.AreaSelectorLib
+namespace ToolLib.AreaSelectorLib
 {
     public class AreaSelector
     {

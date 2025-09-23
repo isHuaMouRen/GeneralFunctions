@@ -1,4 +1,4 @@
-﻿namespace ToolLib.Library.AreaSelectorLib
+﻿namespace ToolLib.AreaSelectorLib
 {
     partial class AreaSelectorForm
     {
@@ -71,7 +71,7 @@
             // 
             // label_Tip
             // 
-            this.label_Tip.Location = new System.Drawing.Point(234, 51);
+            this.label_Tip.Location = new System.Drawing.Point(98, 70);
             this.label_Tip.Name = "label_Tip";
             this.label_Tip.Size = new System.Drawing.Size(452, 34);
             this.label_Tip.TabIndex = 3;
@@ -88,7 +88,7 @@
             this.Controls.Add(this.panel_X);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AreaSelectorForm";

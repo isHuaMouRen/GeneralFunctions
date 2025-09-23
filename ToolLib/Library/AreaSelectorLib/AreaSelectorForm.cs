@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using ToolLib.InputLib;
 
-namespace ToolLib.Library.AreaSelectorLib
+namespace ToolLib.AreaSelectorLib
 {
     public partial class AreaSelectorForm : Form
     {
@@ -37,6 +37,8 @@ namespace ToolLib.Library.AreaSelectorLib
 
             panel_X.Top = mousePos.Y;
             panel_Y.Left = mousePos.X;
+
+            label_Tip.Location = new Point(mousePos.X + 50, mousePos.Y - 50);
 
             if (ClickNum == 1)
             {

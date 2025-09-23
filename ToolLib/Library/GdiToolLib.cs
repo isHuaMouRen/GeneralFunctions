@@ -8,11 +8,8 @@ namespace ToolLib.GdiToolLib
     {
         #region Win32 API
 
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetDC(IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        private static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+        [DllImport("gdi32.dll")]
+        private static extern IntPtr CreatePen(int fnPenStyle, int nWidth, int crColor);
 
         [DllImport("gdi32.dll")]
         private static extern IntPtr CreateSolidBrush(int crColor);
@@ -21,16 +18,16 @@ namespace ToolLib.GdiToolLib
         private static extern IntPtr SelectObject(IntPtr hdc, IntPtr h);
 
         [DllImport("gdi32.dll")]
-        private static extern bool Rectangle(IntPtr hdc, int left, int top, int right, int bottom);
+        private static extern bool DeleteObject(IntPtr ho);
 
         [DllImport("gdi32.dll")]
-        private static extern bool Ellipse(IntPtr hdc, int left, int top, int right, int bottom);
+        private static extern bool Rectangle(IntPtr hdc, int left, int top, int right, int bottom);
 
         [DllImport("gdi32.dll")]
         private static extern bool RoundRect(IntPtr hdc, int left, int top, int right, int bottom, int width, int height);
 
         [DllImport("gdi32.dll")]
-        private static extern bool Polygon(IntPtr hdc, POINT[] points, int count);
+        private static extern bool Ellipse(IntPtr hdc, int left, int top, int right, int bottom);
 
         [DllImport("gdi32.dll")]
         private static extern bool MoveToEx(IntPtr hdc, int x, int y, IntPtr lpPoint);
@@ -39,255 +36,93 @@ namespace ToolLib.GdiToolLib
         private static extern bool LineTo(IntPtr hdc, int x, int y);
 
         [DllImport("gdi32.dll")]
-        private static extern bool SetPixel(IntPtr hdc, int x, int y, int crColor);
+        private static extern bool TextOut(IntPtr hdc, int x, int y, string lpString, int c);
 
         [DllImport("gdi32.dll")]
-        private static extern bool TextOut(IntPtr hdc, int nXStart, int nYStart, string lpString, int cbString);
+        private static extern bool SetPixel(IntPtr hdc, int x, int y, int color);
 
-        [DllImport("gdi32.dll")]
-        private static extern int SetBkMode(IntPtr hdc, int iBkMode);
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetDC(IntPtr hWnd);
 
-        [DllImport("gdi32.dll")]
-        private static extern uint SetTextColor(IntPtr hdc, int crColor);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
+        [DllImport("user32.dll")]
+        private static extern int ReleaseDC(IntPtr hWnd, IntPtr hdc);
 
         #endregion
 
-        private const int TRANSPARENT = 1;
+        private static IntPtr screenDC = GetDC(IntPtr.Zero);
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
+        private static int ToCOLORREF(Color color)
         {
-            public int X;
-            public int Y;
+            return (color.R | (color.G << 8) | (color.B << 16));
         }
 
-        private static IntPtr GetScreenDC() => GetDC(IntPtr.Zero);
-
-        private static void ReleaseScreenDC(IntPtr hdc) => ReleaseDC(IntPtr.Zero, hdc);
-
-        #region 绘图方法
-
-        /// <summary>
-        /// 绘制文本
-        /// </summary>
-        /// <param name="text">文本</param>
-        /// <param name="x">坐标X</param>
-        /// <param name="y">坐标Y</param>
-        /// <param name="color">颜色</param>
-        public static void DrawText(string text, int x, int y, Color color)
+        private static void UsePenBrush(Color border, Color fill, Action<IntPtr> drawAction)
         {
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
+            IntPtr pen = CreatePen(0, 1, ToCOLORREF(border));
+            IntPtr brush = CreateSolidBrush(ToCOLORREF(fill));
+            IntPtr oldPen = SelectObject(screenDC, pen);
+            IntPtr oldBrush = SelectObject(screenDC, brush);
+
+            drawAction(screenDC);
+
+            SelectObject(screenDC, oldPen);
+            SelectObject(screenDC, oldBrush);
+            DeleteObject(pen);
+            DeleteObject(brush);
+        }
+
+        #region 绘制函数
+
+        public static void DrawText(string text, Point p, Color color)
+        {
+            IntPtr pen = CreatePen(0, 1, ToCOLORREF(color));
+            IntPtr oldPen = SelectObject(screenDC, pen);
+
+            TextOut(screenDC, p.X, p.Y, text, text.Length);
+
+            SelectObject(screenDC, oldPen);
+            DeleteObject(pen);
+        }
+
+        public static void DrawRectangle(Rectangle rect, Color border, Color fill)
+        {
+            UsePenBrush(border, fill, hdc =>
             {
-                SetBkMode(hdc, TRANSPARENT);
-                SetTextColor(hdc, ColorTranslator.ToWin32(color));
-                TextOut(hdc, x, y, text, text.Length);
-                ReleaseScreenDC(hdc);
-            }
+                Rectangle(hdc, rect.Left, rect.Top, rect.Right, rect.Bottom);
+            });
         }
 
-        /// <summary>
-        /// 绘制矩形边框
-        /// </summary>
-        /// <param name="left">左侧坐标</param>
-        /// <param name="top">顶部坐标</param>
-        /// <param name="right">右侧坐标</param>
-        /// <param name="bottom">底部坐标</param>
-        /// <param name="color">颜色</param>
-        public static void DrawRectangle(int left, int top, int right, int bottom, Color color)
+        public static void DrawRoundRectangle(Rectangle rect, int roundWidth, int roundHeight, Color border, Color fill)
         {
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
+            UsePenBrush(border, fill, hdc =>
             {
-                IntPtr brush = CreateSolidBrush(ColorTranslator.ToWin32(color));
-                IntPtr oldBrush = SelectObject(hdc, brush);
-                Rectangle(hdc, left, top, right, bottom);
-                SelectObject(hdc, oldBrush);
-                ReleaseScreenDC(hdc);
-            }
+                RoundRect(hdc, rect.Left, rect.Top, rect.Right, rect.Bottom, roundWidth, roundHeight);
+            });
         }
 
-        /// <summary>
-        /// 绘制填充矩形
-        /// </summary>
-        /// <param name="left">左侧坐标</param>
-        /// <param name="top">顶部坐标</param>
-        /// <param name="right">右侧坐标</param>
-        /// <param name="bottom">底部坐标</param>
-        /// <param name="color">颜色</param>
-        public static void DrawFilledRectangle(int left, int top, int right, int bottom, Color color)
+        public static void DrawEllipse(Rectangle rect, Color border, Color fill)
         {
-            DrawRectangle(left, top, right, bottom, color); // GDI Rectangle 默认填充
-        }
-
-        /// <summary>
-        /// 绘制椭圆
-        /// </summary>
-        /// <param name="left">左侧坐标</param>
-        /// <param name="top">顶部坐标</param>
-        /// <param name="right">右侧坐标</param>
-        /// <param name="bottom">底部坐标</param>
-        /// <param name="color">颜色</param>
-        public static void DrawEllipse(int left, int top, int right, int bottom, Color color)
-        {
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
+            UsePenBrush(border, fill, hdc =>
             {
-                IntPtr brush = CreateSolidBrush(ColorTranslator.ToWin32(color));
-                IntPtr oldBrush = SelectObject(hdc, brush);
-                Ellipse(hdc, left, top, right, bottom);
-                SelectObject(hdc, oldBrush);
-                ReleaseScreenDC(hdc);
-            }
+                Ellipse(hdc, rect.Left, rect.Top, rect.Right, rect.Bottom);
+            });
         }
 
-        /// <summary>
-        /// 绘制圆角矩形
-        /// </summary>
-        /// <param name="left">左侧坐标</param>
-        /// <param name="top">顶部坐标</param>
-        /// <param name="right">右侧坐标</param>
-        /// <param name="bottom">底部坐标</param>
-        /// <param name="arcWidth">宽度圆角弧度</param>
-        /// <param name="arcHeight">高度圆角弧度</param>
-        /// <param name="color">颜色</param>
-        public static void DrawRoundRect(int left, int top, int right, int bottom, int arcWidth, int arcHeight, Color color)
+        public static void DrawLine(Point p1, Point p2, Color color)
         {
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
-            {
-                IntPtr brush = CreateSolidBrush(ColorTranslator.ToWin32(color));
-                IntPtr oldBrush = SelectObject(hdc, brush);
-                RoundRect(hdc, left, top, right, bottom, arcWidth, arcHeight);
-                SelectObject(hdc, oldBrush);
-                ReleaseScreenDC(hdc);
-            }
+            IntPtr pen = CreatePen(0, 1, ToCOLORREF(color));
+            IntPtr oldPen = SelectObject(screenDC, pen);
+
+            MoveToEx(screenDC, p1.X, p1.Y, IntPtr.Zero);
+            LineTo(screenDC, p2.X, p2.Y);
+
+            SelectObject(screenDC, oldPen);
+            DeleteObject(pen);
         }
 
-        /// <summary>
-        /// 绘制线
-        /// </summary>
-        /// <param name="x1">起点X</param>
-        /// <param name="y1">起点Y</param>
-        /// <param name="x2">终点X</param>
-        /// <param name="y2">终点Y</param>
-        /// <param name="color">颜色</param>
-        public static void DrawLine(int x1, int y1, int x2, int y2, Color color)
+        public static void DrawPoint(Point p, Color color)
         {
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
-            {
-                SetPixel(hdc, x1, y1, ColorTranslator.ToWin32(color)); // 起点
-                MoveToEx(hdc, x1, y1, IntPtr.Zero);
-                LineTo(hdc, x2, y2);
-                ReleaseScreenDC(hdc);
-            }
-        }
-
-        /// <summary>
-        /// 绘制多边形
-        /// </summary>
-        /// <param name="points">顶点</param>
-        /// <param name="color">颜色</param>
-        public static void DrawPolygon(POINT[] points, Color color)
-        {
-            if (points == null || points.Length < 3) return;
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
-            {
-                IntPtr brush = CreateSolidBrush(ColorTranslator.ToWin32(color));
-                IntPtr oldBrush = SelectObject(hdc, brush);
-                Polygon(hdc, points, points.Length);
-                SelectObject(hdc, oldBrush);
-                ReleaseScreenDC(hdc);
-            }
-        }
-
-        /// <summary>
-        /// 绘制像素(只绘制一个)
-        /// </summary>
-        /// <param name="x">X坐标</param>
-        /// <param name="y">Y坐标</param>
-        /// <param name="color">颜色</param>
-        public static void DrawPixel(int x, int y, Color color)
-        {
-            IntPtr hdc = GetScreenDC();
-            if (hdc != IntPtr.Zero)
-            {
-                SetPixel(hdc, x, y, ColorTranslator.ToWin32(color));
-                ReleaseScreenDC(hdc);
-            }
-        }
-
-        #endregion
-
-        #region 清屏
-
-        /// <summary>
-        /// 清屏
-        /// </summary>
-        public static void ClearScreen()
-        {
-            InvalidateRect(IntPtr.Zero, IntPtr.Zero, true);
-        }
-
-        #endregion
-
-        #region 额外重载
-        /// <summary>
-        /// 绘制矩形(Rectangle类型传入)
-        /// </summary>
-        /// <param name="rect">矩形</param>
-        /// <param name="color">颜色</param>
-        public static void DrawRectangle(Rectangle rect, Color color)
-        {
-            DrawRectangle(rect.Left, rect.Top, rect.Right, rect.Bottom, color);
-        }
-
-        /// <summary>
-        /// 绘制填充矩形(Rectangle类型传入)
-        /// </summary>
-        /// <param name="rect">矩形</param>
-        /// <param name="color">颜色</param>
-        public static void DrawFilledRectangle(Rectangle rect, Color color)
-        {
-            DrawFilledRectangle(rect.Left, rect.Top, rect.Right, rect.Bottom, color);
-        }
-
-        /// <summary>
-        /// 绘制椭圆(Rectangle类型传入)
-        /// </summary>
-        /// <param name="rect">矩形区域</param>
-        /// <param name="color">颜色</param>
-        public static void DrawEllipse(Rectangle rect, Color color)
-        {
-            DrawEllipse(rect.Left, rect.Top, rect.Right, rect.Bottom, color);
-        }
-
-        /// <summary>
-        /// 绘制圆角矩形(Rectangle类型传入)
-        /// </summary>
-        /// <param name="rect">矩形区域</param>
-        /// <param name="arcWidth">宽度圆角弧度</param>
-        /// <param name="arcHeight">高度圆角弧度</param>
-        /// <param name="color">颜色</param>
-        public static void DrawRoundRect(Rectangle rect, int arcWidth, int arcHeight, Color color)
-        {
-            DrawRoundRect(rect.Left, rect.Top, rect.Right, rect.Bottom, arcWidth, arcHeight, color);
-        }
-
-        /// <summary>
-        /// 绘制线(Point类型传入)
-        /// </summary>
-        /// <param name="pos1">起点坐标</param>
-        /// <param name="pos2">终点坐标</param>
-        /// <param name="color">颜色</param>
-        public static void DrawLine(Point pos1,Point pos2,Color color)
-        {
-            DrawLine(pos1.X, pos1.Y, pos2.X, pos2.Y, color);
+            SetPixel(screenDC, p.X, p.Y, ToCOLORREF(color));
         }
 
         #endregion

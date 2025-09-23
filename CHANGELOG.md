@@ -1,5 +1,17 @@
 # Change Log
 
+## 2025.09.23 - 01
+### 更新
+- 之后发布版本之前会经过全面测试，以免错误出现
+- 全面重写 `GdiToolLib` 库
+### 更改
+- 清理 `.gitignore` 文件
+### 修复
+- 修复 `AreaSelectorLib` 命名空间错误的为 `ToolLib.Library.AreaSelectorLib`
+- 修复 `AreaSelectorLib` 中的 `Show()` 方法显示的窗口标签不跟随鼠标的问题
+
+
+
 ## 2025.09.22 - 01
 ### 更新
 - 更新 `AreaSelectorLib` 库，用于选择一片区域，返回 `Rectangle` 类型
