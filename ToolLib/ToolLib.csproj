@@ -108,6 +108,13 @@
     </Compile>
     <Compile Include="Library\AreaSelectorLib\AreaSelectorLib.cs" />
     <Compile Include="Library\CmdLib.cs" />
+    <Compile Include="Library\ErrorReportBoxLib\ErrorReportBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Library\ErrorReportBoxLib\ErrorReportBoxForm.Designer.cs">
+      <DependentUpon>ErrorReportBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Library\ErrorReportBoxLib\ErrorReportBoxLib.cs" />
     <Compile Include="Library\GdiToolLib.cs" />
     <Compile Include="Library\HashLib.cs" />
     <Compile Include="Library\HexLib.cs" />
@@ -132,6 +139,9 @@
     <EmbeddedResource Include="Library\AreaSelectorLib\AreaSelectorForm.resx">
       <DependentUpon>AreaSelectorForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Library\ErrorReportBoxLib\ErrorReportBoxForm.resx">
+      <DependentUpon>ErrorReportBoxForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Library\PosSelectorLib\PosSelectorForm.resx" />
   </ItemGroup>
