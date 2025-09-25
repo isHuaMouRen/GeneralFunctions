@@ -8,6 +8,7 @@ namespace ToolLib.Library.ErrorReportBoxLib
     {
         public string title;
         public string text;
+        public string exTip = null;
         public bool showCloseButton;
         public Exception ex;
 
@@ -59,7 +60,15 @@ namespace ToolLib.Library.ErrorReportBoxLib
             this.Text = title;
             label_Text.Text = text;
 
-            textBox_Ex.Text = $"{ex}";
+            if (exTip == null)
+            {
+                textBox_Ex.Text = $"{ex}";
+            }
+            else
+            {
+                textBox_Ex.Text = $"{exTip}\r\n\r\n-------------------\r\n\r\n{ex}";
+            }
+
 
             if (showCloseButton)
             {

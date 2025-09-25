@@ -65,6 +65,7 @@
             this.textBox_Ex.Size = new System.Drawing.Size(510, 179);
             this.textBox_Ex.TabIndex = 2;
             this.textBox_Ex.Visible = false;
+            this.textBox_Ex.WordWrap = false;
             // 
             // button_ShowInfo
             // 
@@ -108,6 +109,7 @@
             this.Controls.Add(this.label_Text);
             this.Controls.Add(this.pictureBox_Icon);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

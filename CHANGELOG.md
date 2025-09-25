@@ -1,5 +1,15 @@
 # Change Log
 
+## 2025.09.25 - 01
+### 更改
+- 为 `ErrorReportBoxLib` 中的 `Show()` 方法添加 `exTip` 参数，用于在错误信息上方显示提示
+### 更改
+- 更改 `ErrorReportBoxLib` 中的详细信息文本框单行内不折行，而是添加横向滚动条
+### 修复
+- 修复了 `ErrorReportBoxLib` 中，窗体可以更改大小的问题
+
+
+
 ## 2025.09.24 - 01
 ### 更新
 - 更新 `ErrorReportBoxLib` 类，用于显示一个错误报告窗口
