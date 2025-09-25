@@ -1,5 +1,12 @@
 # Change Log
 
+## 2025.09.25 -02
+### 更新
+- 此后将一同发布Nuget包，可直接在Nuget上搜索 `HuaZisToolLib` 进行下载
+- 更新 `README.nuget.md` 文件，在Nuget包界面显示的自述文件
+
+
+
 ## 2025.09.25 - 01
 ### 更改
 - 为 `ErrorReportBoxLib` 中的 `Show()` 方法添加 `exTip` 参数，用于在错误信息上方显示提示

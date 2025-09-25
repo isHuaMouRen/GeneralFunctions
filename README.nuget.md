@@ -2,15 +2,30 @@
 
 自己写程序常用的函数之类的，分享出来。也当做是自己的一个备份了
 
+[[跳转Github储存库]](https://github.com/isHuaMouRen/GeneralFunctions)
+
 ## 如何使用
 
-- 前往Github仓库的[Release界面](https://github.com/isHuaMouRen/GeneralFunctions/releases)下载 `Nuget包` 或者 `.dll` 文件
+下载之后引用dll。并复制下方所有代码到你的代码文件中，即可全部引用。可在更下方查看所有可用的类
 
-- 命令行或Visual Studio控制台下载Nuget包
-``` powershell
-Install-Package HuaZisToolLib
+## 全部引用
+
+``` C#
+using ToolLib.AreaSelectorLib;
+using ToolLib.ErrorReportLib;
+using ToolLib.PosSelectorLib;
+using ToolLib.CmdLib;
+using ToolLib.GdiToolLib;
+using ToolLib.HashLib;
+using ToolLib.HexLib;
+using ToolLib.HotkeyManagerLib;
+using ToolLib.IniLib;
+using ToolLib.InputLib;
+using ToolLib.JsonLib;
+using ToolLib.LogLib;
+using ToolLib.MemoryLib;
+using ToolLib.RegistryLib;
 ```
-
 
 ## 工具列表
 
@@ -31,21 +46,3 @@ Install-Package HuaZisToolLib
 |MemoryLib|Memory|内存操作|[跳转](/Wiki/MemoryLib.md)||
 |RegistryLib|RegistryHelper|注册表操作|[跳转](/Wiki/RegistryLib.md)|仅支持Windows操作系统|
 
-## 全部引用
-
-``` C#
-using ToolLib.AreaSelectorLib;
-using ToolLib.ErrorReportLib;
-using ToolLib.PosSelectorLib;
-using ToolLib.CmdLib;
-using ToolLib.GdiToolLib;
-using ToolLib.HashLib;
-using ToolLib.HexLib;
-using ToolLib.HotkeyManagerLib;
-using ToolLib.IniLib;
-using ToolLib.InputLib;
-using ToolLib.JsonLib;
-using ToolLib.LogLib;
-using ToolLib.MemoryLib;
-using ToolLib.RegistryLib;
-```
