@@ -43,7 +43,8 @@
             this.panel_X.Name = "panel_X";
             this.panel_X.Size = new System.Drawing.Size(100, 2);
             this.panel_X.TabIndex = 0;
-            this.panel_X.Click += new System.EventHandler(this.AnyClick);
+            this.panel_X.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AnyDown);
+            this.panel_X.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AnyUp);
             // 
             // panel_Y
             // 
@@ -52,7 +53,8 @@
             this.panel_Y.Name = "panel_Y";
             this.panel_Y.Size = new System.Drawing.Size(2, 100);
             this.panel_Y.TabIndex = 1;
-            this.panel_Y.Click += new System.EventHandler(this.AnyClick);
+            this.panel_Y.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AnyDown);
+            this.panel_Y.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AnyUp);
             // 
             // timer
             // 
@@ -67,7 +69,8 @@
             this.panel_Area.Name = "panel_Area";
             this.panel_Area.Size = new System.Drawing.Size(200, 100);
             this.panel_Area.TabIndex = 2;
-            this.panel_Area.Click += new System.EventHandler(this.AnyClick);
+            this.panel_Area.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AnyDown);
+            this.panel_Area.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AnyUp);
             // 
             // label_Tip
             // 
@@ -76,6 +79,8 @@
             this.label_Tip.Size = new System.Drawing.Size(452, 34);
             this.label_Tip.TabIndex = 3;
             this.label_Tip.Text = "坐标:  {x} , {y}\r\n请选择第一个坐标点";
+            this.label_Tip.MouseDown += new System.Windows.Forms.MouseEventHandler(this.AnyDown);
+            this.label_Tip.MouseUp += new System.Windows.Forms.MouseEventHandler(this.AnyUp);
             // 
             // AreaSelectorForm
             // 
@@ -95,7 +100,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AreaSelectorForm";
-            this.Click += new System.EventHandler(this.AnyClick);
             this.ResumeLayout(false);
 
         }

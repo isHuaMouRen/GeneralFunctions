@@ -52,18 +52,16 @@ namespace ToolLib.AreaSelectorLib
             }
         }
 
-        private void AnyClick(object sender,EventArgs e)
+        private void AnyDown(object sender, MouseEventArgs e)
         {
-            ClickNum = ClickNum + 1;
-            if (ClickNum == 1)
-            {
-                panel_Area.Location = InputManager.Mouse.GetMousePosition();
-            }
-            else if (ClickNum == 2)
-            {
-                rectangle = new Rectangle(panel_Area.Location, panel_Area.Size);
-                this.Close();
-            }
+            ClickNum =  1;
+            panel_Area.Location = InputManager.Mouse.GetMousePosition();
+        }
+
+        private void AnyUp(object sneder, MouseEventArgs e)
+        {
+            rectangle = new Rectangle(panel_Area.Location, panel_Area.Size);
+            this.Close();
         }
     }
 }

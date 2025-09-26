@@ -2,3 +2,4 @@ ToolLib/packages
 ToolLib/obj
 ToolLib/.vs
 ToolLib/bin
+Nuget-Push.bat
