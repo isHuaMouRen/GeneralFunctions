@@ -107,6 +107,7 @@
       <DependentUpon>AreaSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\AreaSelectorLib\AreaSelectorLib.cs" />
+    <Compile Include="Library\AutoStartLib.cs" />
     <Compile Include="Library\CmdLib.cs" />
     <Compile Include="Library\ErrorReportBoxLib\ErrorReportBoxForm.cs">
       <SubType>Form</SubType>
