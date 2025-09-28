@@ -1,5 +1,11 @@
 # Change Log
 
+## 2025.09.29 - 03
+## 更改
+- 优化 `RegistryLib` 代码
+
+
+
 ## 2025.09.28 - 02
 ## 修复
 - 修复了没有更改 `README.md` 与 `README.nuget.md` 文件的问题
