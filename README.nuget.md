@@ -14,6 +14,7 @@
 using ToolLib.AreaSelectorLib;
 using ToolLib.ErrorReportLib;
 using ToolLib.PosSelectorLib;
+using ToolLib.AutoStartLib;
 using ToolLib.CmdLib;
 using ToolLib.GdiToolLib;
 using ToolLib.HashLib;
@@ -34,6 +35,7 @@ using ToolLib.RegistryLib;
 |AreaSelectorLib|AreaSelector|区域选择器|正在开发...|测试版，请等待稳定后再使用|
 |ErrorReportBoxLib|ErrorReportBox|错误报告提示框|正在开发...||
 |PosSelectorLib|PosSelector|坐标选择器|[跳转](/Wiki/PosSelectorLib.md)||
+|AutoStartLib|AutoStart|开机自启控制|正在开发...|仅支持Forms应用|
 |CmdLib|Cmd|命令行工具|[跳转](/Wiki/CmdLib.md)||
 |GdiToolLib|GdiTool|绘制工具|正在开发...|测试版，请等待稳定后再使用|
 |HashLib|Hash|哈希转换|[跳转](/Wiki/HashLib.md)||
