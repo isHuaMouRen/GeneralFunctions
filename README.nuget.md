@@ -23,6 +23,7 @@ using ToolLib.HotkeyManagerLib;
 using ToolLib.IniLib;
 using ToolLib.InputLib;
 using ToolLib.JsonLib;
+using ToolLib.KeyboardHookLib;
 using ToolLib.LogLib;
 using ToolLib.MemoryLib;
 using ToolLib.RegistryLib;
@@ -44,6 +45,7 @@ using ToolLib.RegistryLib;
 |IniLib|Ini|INI配置文件操作|[跳转](/Wiki/IniLib.md)||
 |InputLib|Mouse Keyboard|模拟键鼠操作|[跳转](/Wiki/InputLib.md)||
 |JsonLib|Json|Json文件读写|[跳转](/Wiki/JsonLib.md)||
+|KeyboardHookLib|KeyboardHook|全局键盘钩子|正在开发...||
 |LogLib|Log|写日志|[跳转](/Wiki/LogLib.md)||
 |MemoryLib|Memory|内存操作|[跳转](/Wiki/MemoryLib.md)||
 |RegistryLib|RegistryHelper|注册表操作|[跳转](/Wiki/RegistryLib.md)|仅支持Windows操作系统|

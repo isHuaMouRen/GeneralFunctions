@@ -123,6 +123,7 @@
     <Compile Include="Library\IniLib.cs" />
     <Compile Include="Library\InputLib.cs" />
     <Compile Include="Library\JsonLib.cs" />
+    <Compile Include="Library\KeyboardHookLib.cs" />
     <Compile Include="Library\LogLib.cs" />
     <Compile Include="Library\MemoryLib.cs" />
     <Compile Include="Library\PosSelectorLib\PosSelectorForm.cs">
