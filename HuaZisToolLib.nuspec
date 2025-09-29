@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>HuaZisToolLib</id>
-        <version>2025.09.28.04</version>
+        <version>2025.09.29.01</version>
         <authors>华某人</authors>
         <owners>华某人</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,9 +11,15 @@
         <license type="expression">MIT</license>
         <projectUrl>https://github.com/isHuaMouRen/GeneralFunctions</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/isHuaMouRen/HuaZisToolLib/main/icon.png</iconUrl>
-        <repository type="git" url="https://github.com/isHuaMouRen/GeneralFunctions.git" branch="main" />
+        <repository type="git" url="https://github.com/isHuaMouRen/GeneralFunctions.git"
+            branch="main" />
         <readme>README.nuget.md</readme>
+
+        <dependencies>
+            <dependency id="Newtonsoft.Json" version="13.*" />
+        </dependencies>
     </metadata>
+
     <files>
         <file src="ToolLib\bin\Release\ToolLib.dll" target="lib\net48" />
         <file src="README.nuget.md" target="" />

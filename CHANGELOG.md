@@ -1,6 +1,15 @@
 # Change Log
 
-## 2025.09.29 - 04
+## 2025.09.29 - 01
+## 更新
+- 优化 `.gitignore` 文件
+## 更改
+- 优化 `KeyboardHookLib`
+- 发布时不再携带 `Newtonsoft.Json.dll` 文件，需自行下载。Nuget包则是添加依赖项 
+
+
+
+## 2025.09.28 - 04
 ## 更新
 - 更新 `KeyboardHookLib` 库，全局键盘钩子
 

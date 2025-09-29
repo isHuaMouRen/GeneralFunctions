@@ -7,20 +7,29 @@ using System.Windows.Forms;
 
 namespace ToolLib.KeyboardHookLib
 {
+    // 自定义事件参数
+    public class KeyboardHookEventArgs : EventArgs
+    {
+        public Keys Key { get; }
+        public bool Handled { get; set; } // 是否拦截
+
+        public KeyboardHookEventArgs(Keys key)
+        {
+            Key = key;
+            Handled = false;
+        }
+    }
+
     public class KeyboardHook : IDisposable
     {
         private IntPtr _hookID = IntPtr.Zero;
         private LowLevelKeyboardProc _proc;
 
-        // 按下事件
-        public event EventHandler<Keys> KeyDownEvent;
-        // 抬起事件
-        public event EventHandler<Keys> KeyUpEvent;
+        // 按下/抬起事件
+        public event EventHandler<KeyboardHookEventArgs> KeyDownEvent;
+        public event EventHandler<KeyboardHookEventArgs> KeyUpEvent;
 
-        // 当前按下的键集合
         private readonly HashSet<Keys> _keysPressed = new HashSet<Keys>();
-
-        // 当前按下的键数组，只读属性
         public Keys[] KeysPressed => _keysPressed.Count > 0 ? _keysPressed.ToArray() : Array.Empty<Keys>();
 
         public KeyboardHook()
@@ -45,20 +54,31 @@ namespace ToolLib.KeyboardHookLib
             {
                 int vkCode = Marshal.ReadInt32(lParam);
                 Keys key = (Keys)vkCode;
+                var args = new KeyboardHookEventArgs(key);
 
                 switch ((int)wParam)
                 {
                     case WM_KEYDOWN:
                     case WM_SYSKEYDOWN:
-                        _keysPressed.Add(key); // 记录按下
-                        KeyDownEvent?.Invoke(this, key);
+                        if (_keysPressed.Add(key)) // 只在第一次按下时触发
+                        {
+                            KeyDownEvent?.Invoke(this, args);
+                        }
                         break;
 
                     case WM_KEYUP:
                     case WM_SYSKEYUP:
-                        _keysPressed.Remove(key); // 记录抬起
-                        KeyUpEvent?.Invoke(this, key);
+                        if (_keysPressed.Remove(key))
+                        {
+                            KeyUpEvent?.Invoke(this, args);
+                        }
                         break;
+                }
+
+                // 如果事件里设置了 Handled = true，则拦截按键
+                if (args.Handled)
+                {
+                    return (IntPtr)1; // 推荐返回非零值，避免某些情况下系统异常
                 }
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
