@@ -6,7 +6,7 @@
 
 - 前往Github仓库的[Release界面](https://github.com/isHuaMouRen/GeneralFunctions/releases)下载 `Nuget包` 或者 `.dll` 文件
 
-- 命令行或Visual Studio控制台下载Nuget包
+- 命令行或Visual Studio控制台下载[Nuget包](https://www.nuget.org/packages/HuaZisToolLib)
 ``` powershell
 Install-Package HuaZisToolLib
 ```
