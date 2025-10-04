@@ -14,13 +14,14 @@ Install-Package HuaZisToolLib
 
 ## 工具列表
 
-|工具名|类名|描述|详细|
+|命名空间|类名|描述|详细|
 |-|-|-|-|
 |AreaSelectorLib    |AreaSelector   |区域选择器         |[跳转](/Wiki/.AreaSelectorLib.md)|
 |ErrorReportBoxLib  |ErrorReportBox |错误报告提示框     |[跳转](/Wiki//.ErrorReportBoxLib.md)|
 |PosSelectorLib     |PosSelector    |坐标选择器         |[跳转](/Wiki/.PosSelectorLib.md)|
 |AutoStartLib       |AutoStart      |开机自启控制       |[跳转](/Wiki/AutoStartLib.md)|
 |CmdLib             |Cmd            |命令行工具         |[跳转](/Wiki/CmdLib.md)|
+|DownloaderLib      |Downloader     |下载器             |[跳转](/Wiki/DownloaderLib.md)|
 |GdiToolLib         |GdiTool        |绘制工具           |[跳转](/Wiki/GdiToolLib.md)|
 |HashLib            |Hash           |哈希转换           |[跳转](/Wiki/HashLib.md)|
 |HexLib             |Hex            |文件十六进制数据操作 |[跳转](/Wiki/HexLib.md)|
@@ -41,6 +42,7 @@ using ToolLib.ErrorReportLib;
 using ToolLib.PosSelectorLib;
 using ToolLib.AutoStartLib;
 using ToolLib.CmdLib;
+using ToolLib.DownloaderLib;
 using ToolLib.GdiToolLib;
 using ToolLib.HashLib;
 using ToolLib.HexLib;

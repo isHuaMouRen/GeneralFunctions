@@ -1,5 +1,12 @@
 # Change Log
 
+## 2025.10.04 - 01
+## 更新
+- 为 `HashLib` 添加 `RandomString()` 方法，用于生成随机字符串
+- 更新 `DownloaderLib` 库，用于下载较大文件
+
+
+
 ## 2025.10.01 - 02
 ### 更新
 - 为 `README.md` 文件添加Nuget包的跳转方式

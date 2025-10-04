@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 // HashLib
@@ -113,5 +114,23 @@ namespace ToolLib.HashLib
             // 返回 8 位十六进制（小写）
             return crc.ToString("x8");
         }
+
+        /// <summary>
+        /// 取随机字符串
+        /// </summary>
+        /// <param name="dict">字符串集，生成出来的随机字符串由此提取</param>
+        /// <param name="length">要生成的长度</param>
+        /// <returns>随机字符串</returns>
+        public static string RandomString(string[] dict, long length)
+        {
+            var random = new Random();
+            var sb = new StringBuilder((int)length);
+            for (int i = 0; i < length; i++)
+            {
+                sb.Append(dict[random.Next(dict.Length)]);
+            }
+            return sb.ToString();
+        }
+
     }
 }
