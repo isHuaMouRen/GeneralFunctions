@@ -22,45 +22,38 @@ namespace ToolLib.CmdLib
         {
             return await Task.Run(() =>
             {
-                try
+                string argPrefix = closeAfter ? "/c " : "/k "; // /c 执行后关闭, /k 执行后保留
+
+                ProcessStartInfo psi = new ProcessStartInfo
                 {
-                    string argPrefix = closeAfter ? "/c " : "/k "; // /c 执行后关闭, /k 执行后保留
+                    FileName = "cmd.exe",
+                    Arguments = argPrefix + command,
+                    RedirectStandardOutput = !showWindow,
+                    RedirectStandardError = !showWindow,
+                    UseShellExecute = showWindow,
+                    CreateNoWindow = !showWindow
+                };
 
-                    ProcessStartInfo psi = new ProcessStartInfo
-                    {
-                        FileName = "cmd.exe",
-                        Arguments = argPrefix + command,
-                        RedirectStandardOutput = !showWindow,
-                        RedirectStandardError = !showWindow,
-                        UseShellExecute = showWindow,
-                        CreateNoWindow = !showWindow
-                    };
-
-                    if (!string.IsNullOrEmpty(workingDirectory))
-                    {
-                        psi.WorkingDirectory = workingDirectory;
-                    }
-
-                    using (Process process = Process.Start(psi))
-                    {
-                        if (showWindow)
-                        {
-                            process.WaitForExit();
-                            return "";
-                        }
-                        else
-                        {
-                            string output = process.StandardOutput.ReadToEnd();
-                            string error = process.StandardError.ReadToEnd();
-                            process.WaitForExit();
-
-                            return string.IsNullOrEmpty(error) ? output : output + Environment.NewLine + "错误: " + error;
-                        }
-                    }
+                if (!string.IsNullOrEmpty(workingDirectory))
+                {
+                    psi.WorkingDirectory = workingDirectory;
                 }
-                catch (Exception ex)
+
+                using (Process process = Process.Start(psi))
                 {
-                    return "执行异常: " + ex.Message;
+                    if (showWindow)
+                    {
+                        process.WaitForExit();
+                        return "";
+                    }
+                    else
+                    {
+                        string output = process.StandardOutput.ReadToEnd();
+                        string error = process.StandardError.ReadToEnd();
+                        process.WaitForExit();
+
+                        return string.IsNullOrEmpty(error) ? output : output + Environment.NewLine + "错误: " + error;
+                    }
                 }
             });
         }
