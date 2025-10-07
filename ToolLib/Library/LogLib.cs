@@ -2,10 +2,6 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-// LogLib
-// 日志工具
-// Version: 2025-9-14 11:49
-
 namespace ToolLib.LogLib
 {
     public enum LogLevel
@@ -28,61 +24,70 @@ namespace ToolLib.LogLib
         }
 
         /// <summary>
+        /// 获取当天日志文件路径，若重名则自动添加(1)、(2)...标号
+        /// </summary>
+        private static string GetAvailableLogFile()
+        {
+            string dateName = DateTime.Now.ToString("yyyy-MM-dd");
+            string basePath = Path.Combine(LogDir, $"{dateName}.log");
+            if (!File.Exists(basePath)) return basePath;
+
+            int i = 1;
+            string newPath;
+            do
+            {
+                newPath = Path.Combine(LogDir, $"{dateName}({i}).log");
+                i++;
+            } while (File.Exists(newPath));
+
+            return newPath;
+        }
+
+        /// <summary>
         /// 写日志
         /// </summary>
-        /// <param name="message">日志内容</param>
-        /// <param name="level">日志等级</param>
-        /// <param name="callerFilePath">自动获取调用文件</param>
-        /// <param name="callerLineNumber">自动获取调用行号</param>
         public static void Write(string message, LogLevel level = LogLevel.Info,
-            [CallerFilePath] string callerFilePath = "",
-            [CallerLineNumber] int callerLineNumber = 0)
+            [CallerFilePath] string callerFilePath = "")
         {
             string logTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
             string fileName = Path.GetFileName(callerFilePath);
-            string log = $"[{logTime}] [{level}] [{fileName}:{callerLineNumber}] {message}";
+            string log = $"[{logTime}] [{level}] [{fileName}] {message}";
 
             // 输出到控制台
             switch (level)
             {
                 case LogLevel.Info:
-                    Console.ForegroundColor = ConsoleColor.White; break;
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
                 case LogLevel.Warn:
-                    Console.ForegroundColor = ConsoleColor.Yellow; break;
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
                 case LogLevel.Error:
-                    Console.ForegroundColor = ConsoleColor.Red; break;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case LogLevel.Debug:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
             }
             Console.WriteLine(log);
             Console.ResetColor();
 
-            // 输出到日志文件（按天分文件）
-            string logFile = Path.Combine(LogDir, DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            // 写入日志文件
             try
             {
+                string logFile = GetAvailableLogFile();
                 File.AppendAllText(logFile, log + Environment.NewLine);
             }
-            catch { /* 防止日志写入异常影响主程序 */ }
+            catch
+            {
+                // 防止日志写入异常影响主程序
+            }
         }
 
-        /// <summary>
-        /// 快捷方法：信息日志
-        /// </summary>
+        // 快捷方法们
         public static void Info(string message) => Write(message, LogLevel.Info);
-
-        /// <summary>
-        /// 快捷方法：警告日志
-        /// </summary>
         public static void Warn(string message) => Write(message, LogLevel.Warn);
-
-        /// <summary>
-        /// 快捷方法：错误日志
-        /// </summary>
         public static void Error(string message) => Write(message, LogLevel.Error);
-
-        /// <summary>
-        /// 快捷方法: 调试日志
-        /// </summary>
-        /// <param name="message"></param>
         public static void Debug(string message) => Write(message, LogLevel.Debug);
     }
 }
