@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>HuaZisToolLib</id>
-        <version>2025.10.07.03</version>
+        <version>2025.10.12.01</version>
         <authors>华某人</authors>
         <owners>华某人</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,7 +10,8 @@
         <tags>工具 库 C# WinForm</tags>
         <license type="expression">MIT</license>
         <projectUrl>https://github.com/isHuaMouRen/GeneralFunctions</projectUrl>
-        <iconUrl>https://raw.githubusercontent.com/isHuaMouRen/HuaZisToolLib/main/icon.png</iconUrl>
+        <iconUrl>
+            https://raw.githubusercontent.com/isHuaMouRen/GeneralFunctions/refs/heads/main/cover.png</iconUrl>
         <repository type="git" url="https://github.com/isHuaMouRen/GeneralFunctions.git"
             branch="main" />
         <readme>README.nuget.md</readme>
@@ -21,7 +22,14 @@
     </metadata>
 
     <files>
-        <file src="ToolLib\bin\Release\ToolLib.dll" target="lib\net48" />
+        <!-- .NET Framework 4.8 -->
+        <file src="ToolLib.Forms/bin/Release/ToolLib.Forms.dll" target="lib\net48" />
+
+        <!-- .NET 8.0 for Windows -->
+        <file src="ToolLib.NET/bin/Release/net8.0-windows10.0.19041.0/ToolLib.NET.dll"
+            target="lib\net8.0-windows10.0.19041.0" />
+
+        <!-- README file -->
         <file src="README.nuget.md" target="" />
     </files>
 </package>

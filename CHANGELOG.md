@@ -1,5 +1,21 @@
 # Change Log
 
+## 2025.10.12 - 01
+### 通知
+- 现在ToolLib将分为 `Forms` 版本与 `.NET` 版本，若想在.NET 框架使用ToolLib。那么你无需勾选兼容Forms即可使用.NET版的ToolLib
+### 更新
+- 将大多数通用的库从 `Forms` 移植到.NET，对于深度依赖Forms的，将使用其他方案实现Forms版的同等效果
+- 为Nuget包添加图标
+### 更改
+- 将Forms版本项目更名为 `ToolLib.Forms`
+- 引用命名空间改为 `ToolLib.Library.xxx`
+- 将原始版库改为 `ToolLib.OLD` 不发布，仅作为存档
+### 移除
+- 移除了 `RegistryLib`
+- 移除了 `PosSelectorLib` 、 `AreaSelectorLib` 、 `ErrorReportBox`
+
+
+
 ## 2025.10.07 - 03
 ### 通知
 - 此版本将作为 `RegistryLib` **最后存在**的一个版本，下个版本将会移除此库
