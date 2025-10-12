@@ -1,5 +1,11 @@
 # Change Log
 
+## 2025.10.12 - 02
+### 更改
+- 将Nuget包分离为 `HuaZisToolLib(Forms版)` 与 `HuaZisToolLib.NET`
+
+
+
 ## 2025.10.12 - 01
 ### 通知
 - 现在ToolLib将分为 `Forms` 版本与 `.NET` 版本，若想在.NET 框架使用ToolLib。那么你无需勾选兼容Forms即可使用.NET版的ToolLib

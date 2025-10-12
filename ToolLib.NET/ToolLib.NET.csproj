@@ -4,6 +4,8 @@
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyVersion>2025.10.12.02</AssemblyVersion>
+    <FileVersion>2025.10.12.02</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
