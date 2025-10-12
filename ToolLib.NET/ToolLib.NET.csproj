@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyVersion>2025.10.12.02</AssemblyVersion>
-    <FileVersion>2025.10.12.02</FileVersion>
+    <AssemblyVersion>2025.10.12.03</AssemblyVersion>
+    <FileVersion>2025.10.12.03</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

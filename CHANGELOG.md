@@ -1,5 +1,11 @@
 # Change Log
 
+## 2025.10.12 - 03
+### 修复
+- 修复.NET版的nuget无法安装的问题
+
+
+
 ## 2025.10.12 - 02
 ### 更改
 - 将Nuget包分离为 `HuaZisToolLib(Forms版)` 与 `HuaZisToolLib.NET`

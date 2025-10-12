@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>HuaZisToolLib.NET</id>
-        <version>2025.10.12.02</version>
+        <version>2025.10.12.03</version>
         <authors>华某人</authors>
         <owners>华某人</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -22,8 +22,8 @@
     </metadata>
 
     <files> 
-        <file src="ToolLib.NET/bin/Release/net8.0-windows10.0.19041.0/ToolLib.NET.dll"
-            target="lib\net8.0-windows10.0.19041.0" />
+        <file src="ToolLib.NET/bin/Release/net8.0-windows/ToolLib.NET.dll"
+            target="lib\net8.0-windows7.0"/>
         <file src="README.nuget.md" target="" />
     </files>
 </package>
