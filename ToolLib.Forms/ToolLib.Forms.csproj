@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -56,7 +57,7 @@
     <Compile Include="Library\IniLib.cs" />
     <Compile Include="Library\InputLib.cs" />
     <Compile Include="Library\JsonLib.cs" />
-    <Compile Include="Library\KeyboardHookLib.cs" />
+    <Compile Include="Library\HookLib.cs" />
     <Compile Include="Library\LogLib.cs" />
     <Compile Include="Library\MemoryLib.cs" />
     <Compile Include="Library\RegistryLib.cs" />
