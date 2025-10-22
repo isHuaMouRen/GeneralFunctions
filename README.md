@@ -29,6 +29,7 @@ Install-Package HuaZisToolLib
 |JsonLib            |Json           |Json文件读写       |[跳转](/Wiki/JsonLib.md)|
 |LogLib             |Log            |写日志             |[跳转](/Wiki/LogLib.md)|
 |MemoryLib          |Memory         |内存操作           |[跳转](/Wiki/MemoryLib.md)|
+|XmlLib             |Xml            |读写Xml            |正在开发...|
 
 ## 全部引用
 
@@ -39,11 +40,12 @@ using ToolLib.Library.DownloaderLib;
 using ToolLib.Library.GdiToolLib;
 using ToolLib.Library.HashLib;
 using ToolLib.Library.HexLib;
-using ToolLib.Library.KeyboardHookLib;
+using ToolLib.Library.HookLib;
 using ToolLib.Library.HotkeyManagerLib;
 using ToolLib.Library.IniLib;
 using ToolLib.Library.InputLib;
 using ToolLib.Library.JsonLib;
 using ToolLib.Library.LogLib;
 using ToolLib.Library.MemoryLib;
+using ToolLib.Library.XmlLib;
 ```

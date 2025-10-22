@@ -61,6 +61,7 @@
     <Compile Include="Library\LogLib.cs" />
     <Compile Include="Library\MemoryLib.cs" />
     <Compile Include="Library\RegistryLib.cs" />
+    <Compile Include="Library\XmlLib.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
