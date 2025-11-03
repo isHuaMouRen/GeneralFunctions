@@ -1,6 +1,0 @@
-<Solution>
-  <Configurations>
-    <BuildType Name="Release" />
-  </Configurations>
-  <Project Path="ToolLib.csproj" Id="e1a7789b-df08-4942-a161-cd893921e292" />
-</Solution>

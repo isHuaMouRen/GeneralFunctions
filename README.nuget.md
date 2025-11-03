@@ -11,20 +11,20 @@
 ## 全部引用
 
 ``` C#
-using ToolLib.Library.AutoStartLib;
-using ToolLib.Library.CmdLib;
-using ToolLib.Library.DownloaderLib;
-using ToolLib.Library.GdiToolLib;
-using ToolLib.Library.HashLib;
-using ToolLib.Library.HexLib;
-using ToolLib.Library.HookLib;
-using ToolLib.Library.HotkeyManagerLib;
-using ToolLib.Library.IniLib;
-using ToolLib.Library.InputLib;
-using ToolLib.Library.JsonLib;
-using ToolLib.Library.LogLib;
-using ToolLib.Library.MemoryLib;
-using ToolLib.Library.XmlLib;
+using Huazi.Library.AutoStart;
+using Huazi.Library.Cmd;
+using Huazi.Library.Downloader;
+using Huazi.Library.GdiTool;
+using Huazi.Library.Hash;
+using Huazi.Library.Hex;
+using Huazi.Library.HookManager;
+using Huazi.Library.HotkeyManager;
+using Huazi.Library.Ini;
+using Huazi.Library.InputManager;
+using Huazi.Library.Json;
+using Huazi.Library.Logger;
+using Huazi.Library.Memory;
+using Huazi.Library.Xml;
 ```
 
 ## 工具列表
