@@ -1,12 +1,12 @@
-# General Functions
+# HuaZi.Library
 
-自己写程序常用的函数之类的，分享出来。也当做是自己的一个备份了
+一个通用工具库
 
-[[跳转Github储存库]](https://github.com/isHuaMouRen/GeneralFunctions)
+[[跳转Github储存库]](https://github.com/isHuaMouRen/HuaZi.Library)
 
 ## 如何使用
 
-下载之后引用dll。并复制下方所有代码到你的代码文件中，即可全部引用。可在更下方查看所有可用的类
+下载后对照最下方的表格，选择需要使用的工具，并引用相应命名空间。嫌麻烦可以复制下方所有using到你的项目里
 
 ## 全部引用
 
@@ -29,19 +29,19 @@ using Huazi.Library.Xml;
 
 ## 工具列表
 
-|命名空间|类名|描述|详细|
-|-|-|-|-|
-|AutoStartLib       |AutoStart      |开机自启控制       |[跳转](/Wiki/AutoStartLib.md)|
-|CmdLib             |Cmd            |命令行工具         |[跳转](/Wiki/CmdLib.md)|
-|DownloaderLib      |Downloader     |下载器             |[跳转](/Wiki/DownloaderLib.md)|
-|GdiToolLib         |GdiTool        |绘制工具           |[跳转](/Wiki/GdiToolLib.md)|
-|HashLib            |Hash           |哈希转换           |[跳转](/Wiki/HashLib.md)|
-|HexLib             |Hex            |文件十六进制数据操作 |[跳转](/Wiki/HexLib.md)|
-|HookLib            |HookManager    |全局钩子       |[跳转](/Wiki/KeyboardHookLib.md)|
-|HotkeyManagerLib   |HotkeyManager  |全局热键           |[跳转](/Wiki/HotkeyManagerLib.md)|
-|IniLib             |Ini            |INI配置文件操作    |[跳转](/Wiki/IniLib.md)|
-|InputLib           |Mouse Keyboard |模拟键鼠操作       |[跳转](/Wiki/InputLib.md)|
-|JsonLib            |Json           |Json文件读写       |[跳转](/Wiki/JsonLib.md)|
-|LogLib             |Log            |写日志             |[跳转](/Wiki/LogLib.md)|
-|MemoryLib          |Memory         |内存操作           |[跳转](/Wiki/MemoryLib.md)|
-|XmlLib             |Xml            |读写Xml            |正在开发...|
+|命名空间/类名|描述|
+|-|-|
+|AutoStart      |开机自启控制
+|Cmd            |命令行工具
+|Downloader     |下载器
+|GdiTool        |绘制工具
+|Hash           |哈希转换
+|Hex            |文件十六进制数据操作
+|HookManager    |全局钩子
+|HotkeyManager  |全局热键
+|Ini            |INI配置文件操作
+|InputManager   |模拟键鼠操作
+|Json           |Json文件读写
+|Logger         |写日志
+|Memory         |内存操作
+|Xml            |读写Xml
