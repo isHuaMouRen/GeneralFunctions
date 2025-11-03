@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.HotkeyManager` | `HotkeyManager` |系统级全局热键管理器（无需窗口句柄）|
 
-```C
+```C#
 public void RegisterHotkey(Modifiers modifier, int keyCode, Action callback)
 ```
 
@@ -18,7 +18,7 @@ public void RegisterHotkey(Modifiers modifier, int keyCode, Action callback)
 |-|-|
 | `InvalidOperationException` |注册失败（热键已被占用或系统限制）|
 
-```C
+```C#
 public void UnregisterHotkey(int id)
 ```
 
@@ -28,14 +28,14 @@ public void UnregisterHotkey(int id)
 |-|-|
 | `id` |注册时分配的热键ID|
 
-```C
+```C#
 public void Dispose()
 ```
 
 注销所有热键并清理资源（实现 IDisposable）
 
 **枚举**  
-```C
+```C#
 [Flags]
 public enum Modifiers : uint
 ```
@@ -58,7 +58,7 @@ public enum Modifiers : uint
 - **缺失功能**：当前类仅注册热键，未提供自动消息处理。需配合以下代码捕获触发：  
 
 **消息处理扩展（必须添加）**  
-```C
+```C#
 // 在 Form 或有 WndProc 的类中
 private const int WM_HOTKEY = 0x0312;
 private HotkeyManager _hotkeyManager = new HotkeyManager();
@@ -76,13 +76,13 @@ protected override void WndProc(ref Message m)
 ```
 
 **需添加引用**  
-```C
+```C#
 using System.Runtime.InteropServices;
 using System.Collections.Generic;  // 若无其他 using
 ```
 
 **示例代码**  
-```C
+```C#
 // 注册 Ctrl + Shift + F12
 _hotkeyManager.RegisterHotkey(
     Modifiers.Control | Modifiers.Shift,

@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Memory` | `Memory` |手动内存占用工具（用于测试/压力模拟）|
 
-```C
+```C#
 public static void Allocate(int megaBytes)
 ```
 
@@ -16,7 +16,7 @@ public static void Allocate(int megaBytes)
 |-|-|
 | `ArgumentException` |占用大小必须大于0|
 
-```C
+```C#
 public static long GetTotalMemoryMB()
 ```
 
@@ -43,7 +43,7 @@ public static long GetTotalMemoryMB()
   - 不适合长期内存泄漏模拟（需手动管理）。  
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.Memory;
 
 // 占用 500 MB

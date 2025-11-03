@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Json` | `Json` |JSON读写工具（基于Newtonsoft.Json）|
 
-```C
+```C#
 public static T ReadJson<T>(string contentOrPath)
 ```
 
@@ -20,7 +20,7 @@ public static T ReadJson<T>(string contentOrPath)
 |-|-|
 | `Exception` |内容为空或无效JSON（包装JsonException）|
 
-```C
+```C#
 public static void WriteJson<T>(string filePath, T data)
 ```
 
@@ -51,7 +51,7 @@ public static void WriteJson<T>(string filePath, T data)
 - 适用于配置读取、数据持久化、API响应解析。  
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.Json;
 
 // 定义模型

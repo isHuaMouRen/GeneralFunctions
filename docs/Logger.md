@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Logger` | `Logger` |线程安全日志记录器（文件 + 彩色控制台）|
 
-```C
+```C#
 public Logger(string directory = null)
 ```
 
@@ -18,7 +18,7 @@ public Logger(string directory = null)
 | `LogDirectory` |当前日志目录|
 | `CurrentLogFile` |当前日志文件路径|
 
-```C
+```C#
 public void SetDirectory(string newDir)
 ```
 
@@ -28,7 +28,7 @@ public void SetDirectory(string newDir)
 |-|-|
 | `newDir` |新目录路径|
 
-```C
+```C#
 public void Write(string message, LogLevel level = LogLevel.Info)
 ```
 
@@ -40,39 +40,39 @@ public void Write(string message, LogLevel level = LogLevel.Info)
 | `level` |日志级别（默认 Info）|
 
 **快捷方法**  
-```C
+```C#
 public void Info(string msg)
 ```  
 信息日志（白色）
 
-```C
+```C#
 public void Warn(string msg)
 ```  
 警告日志（黄色）
 
-```C
+```C#
 public void Error(string msg)
 ```  
 错误日志（红色）
 
-```C
+```C#
 public void Debug(string msg)
 ```  
 调试日志（青色）
 
-```C
+```C#
 public void Fatal(string msg)
 ```  
 致命日志（品红）
 
-```C
+```C#
 public void Dispose()
 ```
 
 释放资源（自动Flush并关闭文件流）
 
 **枚举**  
-```C
+```C#
 public enum LogLevel
 ```
 - `Info`  
@@ -106,7 +106,7 @@ public enum LogLevel
 ```
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.Logger;
 
 using var logger = new Logger(); // 默认 Logs 文件夹

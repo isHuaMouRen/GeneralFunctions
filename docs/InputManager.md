@@ -4,7 +4,7 @@
 
 ### 鼠标操作
 
-```C
+```C#
 public static (int X, int Y) Mouse.GetMousePosition()
 ```
 
@@ -14,7 +14,7 @@ public static (int X, int Y) Mouse.GetMousePosition()
 |-|-|
 | `(int X, int Y)` |屏幕绝对坐标（像素）|
 
-```C
+```C#
 public static void Mouse.SetMousePosition(int x, int y)
 ```
 
@@ -25,7 +25,7 @@ public static void Mouse.SetMousePosition(int x, int y)
 | `x` |X坐标|
 | `y` |Y坐标|
 
-```C
+```C#
 public static void Mouse.SetMousePosition((int X, int Y) pos)
 ```
 
@@ -36,55 +36,55 @@ public static void Mouse.SetMousePosition((int X, int Y) pos)
 | `pos` |坐标元组|
 
 #### 左键
-```C
+```C#
 public static void Mouse.LeftButton.Click()
 ```
 左键点击（当前坐标）
 
-```C
+```C#
 public static void Mouse.LeftButton.Down()
 ```
 左键按下
 
-```C
+```C#
 public static void Mouse.LeftButton.Up()
 ```
 左键释放
 
 #### 右键
-```C
+```C#
 public static void Mouse.RightButton.Click()
 ```
 右键点击
 
-```C
+```C#
 public static void Mouse.RightButton.Down()
 ```
 右键按下
 
-```C
+```C#
 public static void Mouse.RightButton.Up()
 ```
 右键释放
 
 #### 中键
-```C
+```C#
 public static void Mouse.MiddleButton.Click()
 ```
 中键点击
 
-```C
+```C#
 public static void Mouse.MiddleButton.Down()
 ```
 中键按下
 
-```C
+```C#
 public static void Mouse.MiddleButton.Up()
 ```
 中键释放
 
 #### 滚轮
-```C
+```C#
 public static void Mouse.Wheel.ScrollUp(int amount = 120)
 ```
 向上滚动
@@ -93,24 +93,24 @@ public static void Mouse.Wheel.ScrollUp(int amount = 120)
 |-|-|
 | `amount` |滚动量（正值，WHEEL_DELTA=120为一格）|
 
-```C
+```C#
 public static void Mouse.Wheel.ScrollDown(int amount = 120)
 ```
 向下滚动（负值）
 
-```C
+```C#
 public static void Mouse.Wheel.ScrollRight(int amount = 120)
 ```
 向右水平滚动（部分鼠标支持）
 
-```C
+```C#
 public static void Mouse.Wheel.ScrollLeft(int amount = 120)
 ```
 向左水平滚动
 
 ### 键盘操作
 
-```C
+```C#
 public static void Keyboard.KeyDown(byte key)
 ```
 
@@ -120,13 +120,13 @@ public static void Keyboard.KeyDown(byte key)
 |-|-|
 | `key` |VK_CODE（0-255），如 `0x41` 为 A|
 
-```C
+```C#
 public static void Keyboard.KeyUp(byte key)
 ```
 
 释放键
 
-```C
+```C#
 public static async void Keyboard.KeyPress(byte key, int delay = 50)
 ```
 
@@ -155,7 +155,7 @@ public static async void Keyboard.KeyPress(byte key, int delay = 50)
 - **注意**：滥用可能触发反作弊系统；生产环境建议结合 `Task.Delay` 增加人性化间隔。  
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.InputManager;
 
 // 移动鼠标并左键点击

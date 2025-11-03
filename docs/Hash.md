@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Hash` | `Hash` |哈希转换工具类|
 
-```C
+```C#
 public static string MD5(string text)
 ```
 
@@ -16,7 +16,7 @@ public static string MD5(string text)
 |-|-|
 | `string` |32位小写MD5哈希值|
 
-```C
+```C#
 public static string SHA1(string text)
 ```
 
@@ -30,7 +30,7 @@ public static string SHA1(string text)
 |-|-|
 | `string` |40位小写SHA1哈希值|
 
-```C
+```C#
 public static string SHA256(string text)
 ```
 
@@ -44,7 +44,7 @@ public static string SHA256(string text)
 |-|-|
 | `string` |64位小写SHA256哈希值|
 
-```C
+```C#
 public static string SHA512(string text)
 ```
 
@@ -58,7 +58,7 @@ public static string SHA512(string text)
 |-|-|
 | `string` |128位小写SHA512哈希值|
 
-```C
+```C#
 public static string CRC32(string text)
 ```
 
@@ -72,7 +72,7 @@ public static string CRC32(string text)
 |-|-|
 | `string` |8位小写CRC32校验值（非安全哈希）|
 
-```C
+```C#
 public static string RandomString(string[] dict, long length)
 ```
 
@@ -97,7 +97,7 @@ public static string RandomString(string[] dict, long length)
 - Version: 2025-9-14 10:52  
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.Hash;
 
 Console.WriteLine(Hash.MD5("hello")); 

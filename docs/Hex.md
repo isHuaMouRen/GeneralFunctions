@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Hex` | `Hex` |文件十六进制读写工具（异步操作）|
 
-```C
+```C#
 public static async Task<string[]> ReadHexAsync(string filePath, long offset, int count = 16)
 ```
 
@@ -18,7 +18,7 @@ public static async Task<string[]> ReadHexAsync(string filePath, long offset, in
 |-|-|
 | `Task<string[]>` |每个字节的大写十六进制字符串数组（如 ["A1", "FF"]）|
 
-```C
+```C#
 public static async Task ModifyBytesAsync(string filePath, long offset, byte[] newBytes)
 ```
 
@@ -30,7 +30,7 @@ public static async Task ModifyBytesAsync(string filePath, long offset, byte[] n
 | `offset` |起始偏移（从0开始）|
 | `newBytes` |要写入的新字节数组|
 
-```C
+```C#
 public static async Task InsertBytesAsync(string filePath, long offset, byte[] bytesToInsert)
 ```
 
@@ -42,7 +42,7 @@ public static async Task InsertBytesAsync(string filePath, long offset, byte[] b
 | `offset` |插入位置（从0开始）|
 | `bytesToInsert` |要插入的字节数组|
 
-```C
+```C#
 public static async Task DeleteBytesAsync(string filePath, long offset, int length)
 ```
 
@@ -54,7 +54,7 @@ public static async Task DeleteBytesAsync(string filePath, long offset, int leng
 | `offset` |起始偏移（从0开始）|
 | `length` |要删除的字节长度|
 
-```C
+```C#
 public static byte[] HexStringArrayToBytes(string[] hexArray)
 ```
 
@@ -82,7 +82,7 @@ public static byte[] HexStringArrayToBytes(string[] hexArray)
 - 适用于十六进制编辑器、文件补丁、数据修复等场景。  
 
 **示例代码**  
-```C
+```C#
 // 读取前16字节
 string[] hex = await Hex.ReadHexAsync(@"C:\test.bin", 0);
 Console.WriteLine(string.Join(" ", hex)); // 输出: A1 B2 C3 ...

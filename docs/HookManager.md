@@ -4,7 +4,7 @@
 
 ### 键盘钩子
 
-```C
+```C#
 public class KeyboardHook : IDisposable
 ```
 
@@ -15,7 +15,7 @@ public class KeyboardHook : IDisposable
 - `KeyUpEvent`：按键释放时触发  
 
 **事件参数**  
-```C
+```C#
 public class KeyboardHookEventArgs : EventArgs
 ```
 
@@ -30,7 +30,7 @@ public class KeyboardHookEventArgs : EventArgs
 | `KeysPressed` | 当前按下的所有键（byte[]）|
 
 **方法**  
-```C
+```C#
 public void Dispose()
 ```
 卸载钩子，释放资源
@@ -39,7 +39,7 @@ public void Dispose()
 
 ### 鼠标钩子
 
-```C
+```C#
 public class MouseHook : IDisposable
 ```
 
@@ -50,7 +50,7 @@ public class MouseHook : IDisposable
 - `MouseUpEvent`：鼠标释放时触发  
 
 **事件参数**  
-```C
+```C#
 public class MouseHookEventArgs : EventArgs
 ```
 
@@ -60,7 +60,7 @@ public class MouseHookEventArgs : EventArgs
 | `Handled` | 设置为 true 可阻止事件传递（吞噬点击）|
 
 **枚举**  
-```C
+```C#
 public enum MouseButtons : byte
 ```
 - `None = 0`  
@@ -74,7 +74,7 @@ public enum MouseButtons : byte
 | `ButtonsPressed` | 当前按下的所有鼠标键（MouseButtons[]）|
 
 **方法**  
-```C
+```C#
 public void Dispose()
 ```
 卸载钩子，释放资源
@@ -97,7 +97,7 @@ public void Dispose()
 - **注意**：低级钩子有性能开销，程序退出必须调用 `Dispose()`，否则可能导致系统输入异常。  
 
 **示例代码**  
-```C
+```C#
 // 键盘：屏蔽 F12 并检测 Ctrl+C
 using var kb = new HookManager.KeyboardHook();
 kb.KeyDownEvent += (s, e) =>
@@ -125,7 +125,7 @@ Console.ReadLine();
 ```
 
 **当前按键查询示例**  
-```C
+```C#
 byte[] pressed = kb.KeysPressed;
 Console.WriteLine("当前按下键数: " + pressed.Length);
 ```

@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Ini` | `Ini` |INI配置文件读写工具（纯C#实现，无需WinAPI）|
 
-```C
+```C#
 public static void WriteIni(string filePath, string section, string key, string value)
 ```
 
@@ -15,7 +15,7 @@ public static void WriteIni(string filePath, string section, string key, string 
 | `key` |键名（自动Trim）|
 | `value` |值（字符串，支持空）|
 
-```C
+```C#
 public static string ReadIni(string filePath, string section, string key)
 ```
 
@@ -35,7 +35,7 @@ public static string ReadIni(string filePath, string section, string key)
 |-|-|
 | `Exception` |文件不存在（注意：路径为空会抛，未检查）|
 
-```C
+```C#
 public static void DeleteIni(string filePath, string section, string key)
 ```
 
@@ -51,7 +51,7 @@ public static void DeleteIni(string filePath, string section, string key)
 |-|-|
 | `ArgumentException` |键名为空|
 
-```C
+```C#
 public static void DeleteSection(string filePath, string section)
 ```
 
@@ -97,7 +97,7 @@ Debug=True
 ```
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.Ini;
 
 // 写入

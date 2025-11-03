@@ -2,7 +2,7 @@
 |-|-|-|
 | `HuaZi.Library.Xml` | `Xml` |XML序列化/反序列化工具（支持文件或字符串）|
 
-```C
+```C#
 public static T ReadXml<T>(string contentOrPath)
 ```
 
@@ -20,7 +20,7 @@ public static T ReadXml<T>(string contentOrPath)
 |-|-|
 | `Exception` |内容为空或无效XML（包装实际序列化异常）|
 
-```C
+```C#
 public static string WriteXml<T>(T obj, string path = null)
 ```
 
@@ -59,7 +59,7 @@ public static string WriteXml<T>(T obj, string path = null)
 - 适用于配置存储、数据交换、旧系统集成。  
 
 **示例代码**  
-```C
+```C#
 using HuaZi.Library.Xml;
 
 // 定义模型
@@ -108,7 +108,7 @@ Person fromStr = Xml.ReadXml<Person>(xmlStr);
 ```
 
 **常见特性**  
-```C
+```C#
 [XmlRoot("RootName")]         // 根元素名
 [XmlElement("Elem")]         // 子元素
 [XmlAttribute("attr")]       // 属性
