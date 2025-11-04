@@ -1,7 +1,40 @@
 # Change Log
 
+## 2025.11.04 - 01
+> 此后更新将`.NET版本`作为主要更新对象
+### 更新
+- 为 `Hash` 类添加文件哈希方法
+- 为 `AutoStart` 类补全部分注释
+- 为 `Downloader` 类补全部分注释
+- 为 `GdiTool` 类补全注释
+- 为 `Hex` 类补全注释
+- 为 `HookManager` 类补全注释
+- 为 `HotkeyManager` 类补全注释
+- 为 `Ini` 类补全注释
+- 为 `InputManager` 类补全注释
+- 为 `Json` 类补全注释
+- 为 `Logger` 类补全注释
+- 为 `Xml` 类补全注释
+### 更改
+- 在移除Forms版本之后，Nuget包名将改为 `HuaZi.Library` ，没有后缀 `.NET`
+- 现在 `Logger` 构造函数必须传入储存日志的文件夹
+### 修复
+- 解决 `AutoStart` 类内多处兼容性警告
+- 更正Nuget包配置的仓库名错误
+### 重构
+- 重构 `Hash` 类
+### 移除
+- **移除了此项目的`Forms`版本**
+- 移除了 `Hash` 类内的 `RandomString()` 方法
+- 移除 `Cmd` 类
+- 移除 `Memory` 类
+- 移除 `HookManager` 内的无用using
+- 移除 `Logger` 内的无用using
+
+
+
 ## 2025.11.03 - 03
-## 更改
+### 更改
 - 更正部分文档
 
 

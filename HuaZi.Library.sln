@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuaZi.Library.NET", "HuaZi.Library.NET\HuaZi.Library.NET.csproj", "{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuaZi.Library.Forms", "HuaZi.Library.Forms\HuaZi.Library.Forms.csproj", "{99408280-C487-44AB-87E2-CD59B83C1D6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuaZi.Library", "HuaZi.Library\HuaZi.Library.csproj", "{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,8 +12,6 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99408280-C487-44AB-87E2-CD59B83C1D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99408280-C487-44AB-87E2-CD59B83C1D6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,6 @@
 
 ``` C#
 using Huazi.Library.AutoStart;
-using Huazi.Library.Cmd;
 using Huazi.Library.Downloader;
 using Huazi.Library.GdiTool;
 using Huazi.Library.Hash;
@@ -23,7 +22,6 @@ using Huazi.Library.Ini;
 using Huazi.Library.InputManager;
 using Huazi.Library.Json;
 using Huazi.Library.Logger;
-using Huazi.Library.Memory;
 using Huazi.Library.Xml;
 ```
 
@@ -32,7 +30,6 @@ using Huazi.Library.Xml;
 |命名空间/类名|描述|
 |-|-|
 |AutoStart      |开机自启控制
-|Cmd            |命令行工具
 |Downloader     |下载器
 |GdiTool        |绘制工具
 |Hash           |哈希转换
@@ -43,5 +40,4 @@ using Huazi.Library.Xml;
 |InputManager   |模拟键鼠操作
 |Json           |Json文件读写
 |Logger         |写日志
-|Memory         |内存操作
 |Xml            |读写Xml

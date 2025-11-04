@@ -25,7 +25,6 @@ Install-Package HuaZi.Library.Forms
 |命名空间/类名|描述|详细|
 |-|-|-|
 |AutoStart      |开机自启控制       |[跳转](/docs/AutoStart.md)|
-|Cmd            |命令行工具         |[跳转](/docs/Cmd.md)|
 |Downloader     |下载器             |[跳转](/docs/Downloader.md)|
 |GdiTool        |绘制工具           |[跳转](/docs/GdiTool.md)|
 |Hash           |哈希转换           |[跳转](/docs/Hash.md)|
@@ -36,14 +35,12 @@ Install-Package HuaZi.Library.Forms
 |InputManager   |模拟键鼠操作       |[跳转](/docs/InputManager.md)|
 |Json           |Json文件读写       |[跳转](/docs/Json.md)|
 |Logger         |写日志             |[跳转](/docs/Logger.md)|
-|Memory         |内存操作           |[跳转](/docs/Memory.md)|
 |Xml            |读写Xml            |[跳转](/docs/Xml.md)|
 
 ## 全部引用
 
 ``` C#
 using Huazi.Library.AutoStart; 
-using Huazi.Library.Cmd; 
 using Huazi.Library.Downloader; 
 using Huazi.Library.GdiTool; 
 using Huazi.Library.Hash; 
@@ -54,6 +51,5 @@ using Huazi.Library.Ini;
 using Huazi.Library.InputManager; 
 using Huazi.Library.Json; 
 using Huazi.Library.Logger; 
-using Huazi.Library.Memory; 
 using Huazi.Library.Xml; 
 ```
