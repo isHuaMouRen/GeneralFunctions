@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HuaZi.Library", "HuaZi.Library\HuaZi.Library.csproj", "{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{BE2E80B0-FD0F-4693-9FE8-645DC844E499}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Release|Any CPU = Release|Any CPU
@@ -12,6 +14,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAD6A75F-6EE8-4853-BBDC-8CCFD3B77A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE2E80B0-FD0F-4693-9FE8-645DC844E499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE2E80B0-FD0F-4693-9FE8-645DC844E499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
