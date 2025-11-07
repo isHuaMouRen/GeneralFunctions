@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="HuaZi.Library">
-      <HintPath>..\HuaZi.Library\bin\Release\net8.0\HuaZi.Library.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\HuaZi.Library\HuaZi.Library.csproj" />
   </ItemGroup>
 
 </Project>

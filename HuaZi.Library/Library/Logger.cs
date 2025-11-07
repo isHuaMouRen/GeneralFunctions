@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace HuaZi.Library.Logger
@@ -12,7 +13,7 @@ namespace HuaZi.Library.Logger
     }
 
     /// <summary>
-    /// 日志记录器
+    /// 线程安全、每日分文件、带调用位置的日志记录器
     /// </summary>
     public class Logger : IDisposable
     {
@@ -21,18 +22,20 @@ namespace HuaZi.Library.Logger
         private StreamWriter _writer;
         private readonly object _lock = new object();
 
+        
+        public bool ShowCallerInfo { get; set; } = true;
         public string LogDirectory => _logDir;
         public string CurrentLogFile => _logFilePath;
 
         /// <summary>
         /// 创建一个新的日志实例
         /// </summary>
-        /// <param name="directory">日志目录</param>
-        public Logger(string directory)
+        /// <param name="directory">日志目录，留空则使用程序根目录下的 Logs 文件夹</param>
+        public Logger(string directory = null!)
         {
             _logDir = string.IsNullOrWhiteSpace(directory)
                 ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs")
-                : directory;
+                : directory.Trim();
 
             if (!Directory.Exists(_logDir))
                 Directory.CreateDirectory(_logDir);
@@ -71,29 +74,47 @@ namespace HuaZi.Library.Logger
             }
         }
 
+        /// <summary>
+        /// 更改日志目录（会自动创建并切换）
+        /// </summary>
         public void SetDirectory(string newDir)
         {
-            if (string.IsNullOrWhiteSpace(newDir))
-                return;
+            if (string.IsNullOrWhiteSpace(newDir)) return;
 
             lock (_lock)
             {
                 Dispose();
-                _logDir = newDir;
+                _logDir = newDir.Trim();
                 if (!Directory.Exists(_logDir))
                     Directory.CreateDirectory(_logDir);
-
                 _logFilePath = CreateUniqueLogFilePathForToday();
-
                 var fs = new FileStream(_logFilePath, FileMode.Append, FileAccess.Write, FileShare.Read);
                 _writer = new StreamWriter(fs, Encoding.UTF8) { AutoFlush = true };
             }
         }
 
-        public void Write(string message, LogLevel level = LogLevel.Info)
+        /// <summary>
+        /// 核心写入方法
+        /// </summary>
+        public void Write(
+            string message,
+            LogLevel level = LogLevel.Info,
+            [CallerMemberName] string callerMember = "",
+            [CallerFilePath] string callerFile = "",
+            [CallerLineNumber] int callerLine = 0)
         {
             string logTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            string log = $"[{logTime}] [{level}] {message}";
+            string location = "";
+
+            if (ShowCallerInfo)
+            {
+                string fileName = Path.GetFileName(callerFile);
+                location = $"{fileName}:{callerLine} in {callerMember}";
+            }
+
+            string log = string.IsNullOrEmpty(location)
+                ? $"[{logTime}] [{level}]: {message}"
+                : $"[{logTime}] [{location}] [{level}]: {message}";
 
             // 控制台彩色输出
             try
@@ -121,17 +142,40 @@ namespace HuaZi.Library.Logger
                 }
                 catch
                 {
-                    // fallback：直接追加
-                    File.AppendAllText(_logFilePath, log + Environment.NewLine, Encoding.UTF8);
+                    try
+                    {
+                        File.AppendAllText(_logFilePath, log + Environment.NewLine, Encoding.UTF8);
+                    }
+                    catch { }
                 }
             }
         }
 
-        public void Info(string msg) => Write(msg, LogLevel.Info);
-        public void Warn(string msg) => Write(msg, LogLevel.Warn);
-        public void Error(string msg) => Write(msg, LogLevel.Error);
-        public void Debug(string msg) => Write(msg, LogLevel.Debug);
-        public void Fatal(string msg) => Write(msg, LogLevel.Fatal);
+        // 快捷方法
+        public void Info(string msg,
+            [CallerMemberName] string m = "",
+            [CallerFilePath] string f = "",
+            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Info, m, f, l);
+
+        public void Warn(string msg,
+            [CallerMemberName] string m = "",
+            [CallerFilePath] string f = "",
+            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Warn, m, f, l);
+
+        public void Error(string msg,
+            [CallerMemberName] string m = "",
+            [CallerFilePath] string f = "",
+            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Error, m, f, l);
+
+        public void Debug(string msg,
+            [CallerMemberName] string m = "",
+            [CallerFilePath] string f = "",
+            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Debug, m, f, l);
+
+        public void Fatal(string msg,
+            [CallerMemberName] string m = "",
+            [CallerFilePath] string f = "",
+            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Fatal, m, f, l);
 
         public void Dispose()
         {

@@ -1,5 +1,15 @@
 # Change Log
 
+## 2025.11.07 - 01
+### 更新
+- `Logger` 库输出日志时会附加调用位置
+- `Downloader` 实例化调用
+- 可自定义 `Downloader` 下载进度/速度回调间隔
+- 为 `Downloader` 添加下载完成回调
+- 重构 `Downloader`
+
+
+
 ## 2025.11.06 - 01
 ### 更新
 - 为 `Downloader` 添加下载速度回调

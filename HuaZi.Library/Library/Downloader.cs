@@ -1,83 +1,109 @@
-﻿namespace HuaZi.Library.Downloader
+﻿using System.Diagnostics;
+
+namespace HuaZi.Library.Downloader
 {
     /// <summary>
-    /// 好用的下载器(真的非常好用!)
+    /// 好用的下载器(真的很好用!)
     /// </summary>
-    public class Downloader
+    public class Downloader : IDisposable
     {
-        /// <summary>
-        /// 下载进度和速度信息
-        /// </summary>
-        /// <param name="progress">下载进度百分比 (0-100)</param>
-        /// <param name="speedKBps">当前下载速度 (KB/s)</param>
-        public delegate void ProgressCallback(double progress, double speedKBps);
-
-        /// <summary>
-        /// 异步下载文件
-        /// </summary>
-        /// <param name="url">文件URL</param>
-        /// <param name="savePath">保存路径</param>
-        /// <param name="callback">进度与速度合并回调</param>
-        /// <param name="cancellationToken">取消Token</param>
-        /// <returns></returns>
-        public static async Task DownloadFileAsync(
-            string url,
-            string savePath,
-            ProgressCallback? callback = null,
-            CancellationToken cancellationToken = default)
-        {
-            using var client = new HttpClient();
-            using var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
-            response.EnsureSuccessStatusCode();
-
-            var totalBytes = response.Content.Headers.ContentLength ?? -1L;
-            var canReport = totalBytes != -1 && callback != null;
-
-            using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
-            using var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true);
-
-            var buffer = new byte[8192];
-            long totalRead = 0;
-            int bytesRead;
-
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            long lastReportBytes = 0;
-            double lastReportTimeMs = 0;
-
-            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) > 0)
+        private static readonly HttpClient HttpClient = new(
+            new HttpClientHandler
             {
-                await fileStream.WriteAsync(buffer, 0, bytesRead, cancellationToken);
-                totalRead += bytesRead;
+                AutomaticDecompression =
+                    System.Net.DecompressionMethods.GZip |
+                    System.Net.DecompressionMethods.Deflate
+            })
+        {
+            Timeout = Timeout.InfiniteTimeSpan
+        };
 
-                if (canReport)
+        public string Url { get; init; } = "";
+        public string SavePath { get; init; } = "";
+        public Action<double, double>? Progress { get; init; }   // (progress%, speed KB/s)
+        public Action<bool, string?>? Completed { get; init; }   // (success, error)
+        public int ReportIntervalMs { get; init; } = 200;        // 回调频率
+
+        private CancellationTokenSource? _cts;
+        private Task? _task;
+
+        /// <summary>
+        /// 开始下载
+        /// </summary>
+        public void StartDownload()
+        {
+            if (string.IsNullOrWhiteSpace(Url)) throw new InvalidOperationException("Url 未设置");
+            if (string.IsNullOrWhiteSpace(SavePath)) throw new InvalidOperationException("SavePath 未设置");
+            if (_task?.IsCompleted == false) throw new InvalidOperationException("已在下载");
+
+            _cts?.Dispose();
+            _cts = new CancellationTokenSource();
+            _task = DownloadAsync(_cts.Token);
+        }
+
+        /// <summary>
+        /// 停止下载
+        /// </summary>
+        public void StopDownload() => _cts?.Cancel();
+
+        private async Task DownloadAsync(CancellationToken ct)
+        {
+            try
+            {
+                using var response = await HttpClient.GetAsync(Url, HttpCompletionOption.ResponseHeadersRead, ct);
+                response.EnsureSuccessStatusCode();
+
+                var total = response.Content.Headers.ContentLength ?? -1;
+                var canReport = total > 0 && Progress != null;
+
+                Directory.CreateDirectory(Path.GetDirectoryName(SavePath)!);
+                if (File.Exists(SavePath)) File.Delete(SavePath);
+
+                using var stream = await response.Content.ReadAsStreamAsync(ct);
+                await using var file = new FileStream(SavePath, FileMode.Create, FileAccess.Write, FileShare.None, 32768, true);
+
+                var buffer = new byte[32768];
+                long readTotal = 0;
+                var sw = Stopwatch.StartNew();
+                long lastBytes = 0;
+                double lastTime = 0;
+
+                int bytes;
+                while ((bytes = await stream.ReadAsync(buffer, ct)) > 0)
                 {
-                    double currentTimeMs = stopwatch.Elapsed.TotalMilliseconds;
+                    await file.WriteAsync(buffer.AsMemory(0, bytes), ct);
+                    readTotal += bytes;
 
-                    // 计算进度
-                    double percent = (double)totalRead / totalBytes * 100;
-
-                    // 计算速度 (KB/s)
-                    double speedKBps = 0;
-                    if (currentTimeMs > lastReportTimeMs)
+                    if (canReport && sw.Elapsed.TotalMilliseconds - lastTime >= ReportIntervalMs)
                     {
-                        double deltaBytes = totalRead - lastReportBytes;
-                        double deltaTimeSec = (currentTimeMs - lastReportTimeMs) / 1000.0;
-                        speedKBps = deltaBytes / deltaTimeSec / 1024.0;
+                        var percent = readTotal * 100.0 / total;
+                        var speed = (readTotal - lastBytes) / ((sw.Elapsed.TotalMilliseconds - lastTime) / 1000.0) / 1024.0;
+
+                        Progress?.Invoke(percent, speed);
+
+                        lastBytes = readTotal;
+                        lastTime = sw.Elapsed.TotalMilliseconds;
                     }
-
-                    // 合并回调
-                    callback?.Invoke(percent, speedKBps);
-
-                    // 更新状态
-                    lastReportBytes = totalRead;
-                    lastReportTimeMs = currentTimeMs;
                 }
 
-                cancellationToken.ThrowIfCancellationRequested();
-            }
+                Progress?.Invoke(100.0, 0.0);
+                Completed?.Invoke(true, null);
 
-            // 结束时回调一次（进度 100%，速度 0）
-            callback?.Invoke(100.0, 0.0);
+            }
+            catch (OperationCanceledException)
+            {
+                Completed?.Invoke(false, "已取消");
+            }
+            catch (Exception ex)
+            {
+                Completed?.Invoke(false, ex.Message);
+            }
+        }
+
+        public void Dispose()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
     }
 }
