@@ -13,182 +13,238 @@ namespace HuaZi.Library.Logger
     }
 
     /// <summary>
-    /// 线程安全、每日分文件、带调用位置的日志记录器
+    /// 线程安全、每日自动分文件、支持调用位置信息的高性能日志记录器
+    /// 支持对象初始化器完整配置
     /// </summary>
-    public class Logger : IDisposable
+    public sealed class Logger : IDisposable
     {
-        private string _logDir;
-        private string _logFilePath;
-        private StreamWriter _writer;
-        private readonly object _lock = new object();
+        // ──────────────────────────────────────────────────
+        // 可配置属性（支持对象初始化器）
+        // ──────────────────────────────────────────────────
+        public string? LogDirectory { get; init; }
+        public bool ShowCallerInfo { get; init; } = true;
+        public bool ShowDate { get; init; } = true;
+        public bool ShowTime { get; init; } = true;
+        public Encoding Encoding { get; init; } = Encoding.UTF8;
 
-        
-        public bool ShowCallerInfo { get; set; } = true;
-        public string LogDirectory => _logDir;
-        public string CurrentLogFile => _logFilePath;
+        // ──────────────────────────────────────────────────
+        // 只读运行时信息
+        // ──────────────────────────────────────────────────
+        public string CurrentLogDirectory { get; private set; } = null!;
+        public string CurrentLogFilePath { get; private set; } = null!;
 
-        /// <summary>
-        /// 创建一个新的日志实例
-        /// </summary>
-        /// <param name="directory">日志目录，留空则使用程序根目录下的 Logs 文件夹</param>
-        public Logger(string directory = null!)
+        // ──────────────────────────────────────────────────
+        // 私有字段
+        // ──────────────────────────────────────────────────
+        private StreamWriter? _writer;
+        private readonly object _lock = new();
+        private bool _disposed;
+
+        // ──────────────────────────────────────────────────
+        // 构造函数
+        // ──────────────────────────────────────────────────
+        public Logger()
         {
-            _logDir = string.IsNullOrWhiteSpace(directory)
-                ? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs")
-                : directory.Trim();
-
-            if (!Directory.Exists(_logDir))
-                Directory.CreateDirectory(_logDir);
-
-            _logFilePath = CreateUniqueLogFilePathForToday();
-
-            var fs = new FileStream(_logFilePath, FileMode.Append, FileAccess.Write, FileShare.Read);
-            _writer = new StreamWriter(fs, Encoding.UTF8) { AutoFlush = true };
-
-            AppDomain.CurrentDomain.ProcessExit += (s, e) => Dispose();
+            Initialize();
+            AppDomain.CurrentDomain.ProcessExit += (_, _) => Dispose();
         }
 
-        private string CreateUniqueLogFilePathForToday()
+        private void Initialize()
         {
-            string dateName = DateTime.Now.ToString("yyyy-MM-dd");
+            string directory = LogDirectory ??
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+
+            directory = directory.Trim();
+
+            CurrentLogDirectory = directory;
+            if (!Directory.Exists(CurrentLogDirectory))
+                Directory.CreateDirectory(CurrentLogDirectory);
+
+            CurrentLogFilePath = GenerateLogFilePath(CurrentLogDirectory);
+
+            var stream = new FileStream(CurrentLogFilePath, FileMode.Append, FileAccess.Write, FileShare.Read);
+            _writer = new StreamWriter(stream, Encoding) { AutoFlush = true };
+        }
+
+        private static string GenerateLogFilePath(string directory)
+        {
+            string datePrefix = DateTime.Today.ToString("yyyy-MM-dd");
             int index = 0;
+
             while (true)
             {
-                string candidate = index == 0
-                    ? Path.Combine(_logDir, $"{dateName}.log")
-                    : Path.Combine(_logDir, $"{dateName}({index}).log");
+                string fileName = index == 0
+                    ? $"{datePrefix}.log"
+                    : $"{datePrefix}({index}).log";
+
+                string path = Path.Combine(directory, fileName);
 
                 try
                 {
-                    using (var fs = new FileStream(candidate, FileMode.CreateNew, FileAccess.Write, FileShare.Read)) { }
-                    return candidate;
+                    using var fs = new FileStream(path, FileMode.CreateNew, FileAccess.Write, FileShare.None);
+                    return path;
                 }
                 catch (IOException)
                 {
                     index++;
                 }
-                catch
-                {
-                    return candidate;
-                }
             }
         }
 
-        /// <summary>
-        /// 更改日志目录（会自动创建并切换）
-        /// </summary>
-        public void SetDirectory(string newDir)
+        // ──────────────────────────────────────────────────
+        // 核心日志方法
+        // ──────────────────────────────────────────────────
+        public void Log(string message, LogLevel level = LogLevel.Info,
+            [CallerMemberName] string memberName = "",
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0)
         {
-            if (string.IsNullOrWhiteSpace(newDir)) return;
+            if (string.IsNullOrWhiteSpace(message))
+                return;
 
-            lock (_lock)
-            {
-                Dispose();
-                _logDir = newDir.Trim();
-                if (!Directory.Exists(_logDir))
-                    Directory.CreateDirectory(_logDir);
-                _logFilePath = CreateUniqueLogFilePathForToday();
-                var fs = new FileStream(_logFilePath, FileMode.Append, FileAccess.Write, FileShare.Read);
-                _writer = new StreamWriter(fs, Encoding.UTF8) { AutoFlush = true };
-            }
+            string timestamp = BuildTimestamp();
+            string location = ShowCallerInfo
+                ? $"{Path.GetFileName(filePath)}:{lineNumber} {memberName}"
+                : "";
+
+            string line = string.IsNullOrEmpty(location)
+                ? $"[{timestamp}] [{level}]: {message}"
+                : $"[{timestamp}] [{location}] [{level}]: {message}";
+
+            WriteToConsole(line, level);
+            WriteToFile(line);
         }
 
         /// <summary>
-        /// 核心写入方法
+        /// 根据 ShowDate / ShowTime 配置动态构建时间戳
         /// </summary>
-        public void Write(
-            string message,
-            LogLevel level = LogLevel.Info,
-            [CallerMemberName] string callerMember = "",
-            [CallerFilePath] string callerFile = "",
-            [CallerLineNumber] int callerLine = 0)
+        private string BuildTimestamp()
         {
-            string logTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
-            string location = "";
+            if (ShowDate && ShowTime)
+                return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
-            if (ShowCallerInfo)
-            {
-                string fileName = Path.GetFileName(callerFile);
-                location = $"{fileName}:{callerLine} in {callerMember}";
-            }
+            if (ShowDate)
+                return DateTime.Today.ToString("yyyy-MM-dd");
 
-            string log = string.IsNullOrEmpty(location)
-                ? $"[{logTime}] [{level}]: {message}"
-                : $"[{logTime}] [{location}] [{level}]: {message}";
+            if (ShowTime)
+                return DateTime.Now.ToString("HH:mm:ss.fff");
 
-            // 控制台彩色输出
+            return ""; // 都不显示时返回空字符串
+        }
+
+        private static void WriteToConsole(string line, LogLevel level)
+        {
             try
             {
-                ConsoleColor prev = Console.ForegroundColor;
-                switch (level)
+                ConsoleColor color = level switch
                 {
-                    case LogLevel.Info: Console.ForegroundColor = ConsoleColor.White; break;
-                    case LogLevel.Warn: Console.ForegroundColor = ConsoleColor.Yellow; break;
-                    case LogLevel.Error: Console.ForegroundColor = ConsoleColor.Red; break;
-                    case LogLevel.Debug: Console.ForegroundColor = ConsoleColor.Cyan; break;
-                    case LogLevel.Fatal: Console.ForegroundColor = ConsoleColor.Magenta; break;
-                }
-                Console.WriteLine(log);
-                Console.ForegroundColor = prev;
+                    LogLevel.Info => ConsoleColor.White,
+                    LogLevel.Warn => ConsoleColor.Yellow,
+                    LogLevel.Error => ConsoleColor.Red,
+                    LogLevel.Debug => ConsoleColor.Cyan,
+                    LogLevel.Fatal => ConsoleColor.Magenta,
+                    _ => ConsoleColor.Gray
+                };
+
+                ConsoleColor previous = Console.ForegroundColor;
+                Console.ForegroundColor = color;
+                Console.WriteLine(line);
+                Console.ForegroundColor = previous;
             }
             catch { }
+        }
 
-            // 写入文件
+        private void WriteToFile(string line)
+        {
             lock (_lock)
             {
+                if (_disposed || _writer is null)
+                    return;
+
                 try
                 {
-                    _writer?.WriteLine(log);
+                    _writer.WriteLine(line);
                 }
                 catch
                 {
                     try
                     {
-                        File.AppendAllText(_logFilePath, log + Environment.NewLine, Encoding.UTF8);
+                        File.AppendAllText(CurrentLogFilePath, line + Environment.NewLine, Encoding);
                     }
                     catch { }
                 }
             }
         }
 
-        // 快捷方法
-        public void Info(string msg,
-            [CallerMemberName] string m = "",
-            [CallerFilePath] string f = "",
-            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Info, m, f, l);
+        // ──────────────────────────────────────────────────
+        // 便捷方法
+        // ──────────────────────────────────────────────────
+        public void Info(string msg, [CallerMemberName] string m = "", [CallerFilePath] string f = "", [CallerLineNumber] int l = 0)
+            => Log(msg, LogLevel.Info, m, f, l);
 
-        public void Warn(string msg,
-            [CallerMemberName] string m = "",
-            [CallerFilePath] string f = "",
-            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Warn, m, f, l);
+        public void Warn(string msg, [CallerMemberName] string m = "", [CallerFilePath] string f = "", [CallerLineNumber] int l = 0)
+            => Log(msg, LogLevel.Warn, m, f, l);
 
-        public void Error(string msg,
-            [CallerMemberName] string m = "",
-            [CallerFilePath] string f = "",
-            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Error, m, f, l);
+        public void Error(string msg, [CallerMemberName] string m = "", [CallerFilePath] string f = "", [CallerLineNumber] int l = 0)
+            => Log(msg, LogLevel.Error, m, f, l);
 
-        public void Debug(string msg,
-            [CallerMemberName] string m = "",
-            [CallerFilePath] string f = "",
-            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Debug, m, f, l);
+        public void Debug(string msg, [CallerMemberName] string m = "", [CallerFilePath] string f = "", [CallerLineNumber] int l = 0)
+            => Log(msg, LogLevel.Debug, m, f, l);
 
-        public void Fatal(string msg,
-            [CallerMemberName] string m = "",
-            [CallerFilePath] string f = "",
-            [CallerLineNumber] int l = 0) => Write(msg, LogLevel.Fatal, m, f, l);
+        public void Fatal(string msg, [CallerMemberName] string m = "", [CallerFilePath] string f = "", [CallerLineNumber] int l = 0)
+            => Log(msg, LogLevel.Fatal, m, f, l);
 
-        public void Dispose()
+        // ──────────────────────────────────────────────────
+        // 运行时切换目录
+        // ──────────────────────────────────────────────────
+        public void ChangeDirectory(string newDirectory)
         {
+            if (string.IsNullOrWhiteSpace(newDirectory))
+                return;
+
+            string target = newDirectory.Trim();
+
             lock (_lock)
             {
-                try
-                {
-                    _writer?.Flush();
-                    _writer?.Dispose();
-                    _writer = null!;
-                }
-                catch { }
+                if (string.Equals(CurrentLogDirectory, target, StringComparison.OrdinalIgnoreCase))
+                    return;
+
+                DisposeWriter();
+
+                CurrentLogDirectory = target;
+                if (!Directory.Exists(CurrentLogDirectory))
+                    Directory.CreateDirectory(CurrentLogDirectory);
+
+                CurrentLogFilePath = GenerateLogFilePath(CurrentLogDirectory);
+
+                var stream = new FileStream(CurrentLogFilePath, FileMode.Append, FileAccess.Write, FileShare.Read);
+                _writer = new StreamWriter(stream, Encoding) { AutoFlush = true };
             }
+        }
+
+        // ──────────────────────────────────────────────────
+        // IDisposable
+        // ──────────────────────────────────────────────────
+        public void Dispose()
+        {
+            if (_disposed) return;
+
+            lock (_lock)
+            {
+                DisposeWriter();
+                _disposed = true;
+            }
+        }
+
+        private void DisposeWriter()
+        {
+            try
+            {
+                _writer?.Flush();
+                _writer?.Dispose();
+            }
+            catch { }
+            _writer = null;
         }
     }
 }
